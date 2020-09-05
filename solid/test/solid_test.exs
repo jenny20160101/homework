@@ -41,7 +41,7 @@ defmodule SolidTest do
   test "生成月度报告 - 彩色报告 - 保存为doc" do
     month = 10
 
-    %{save_as: save_as, report: report} =
+    %{export_to: export_to, report: report} =
       month
       |> Reports.monthly_report()
       |> Reports.make_colorful_and_fun()
@@ -52,13 +52,13 @@ defmodule SolidTest do
     assert title == "monthly_report"
     assert content == month
     assert format == "colorful"
-    assert save_as == "doc"
+    assert export_to == "doc"
   end
 
   test "生成月度报告 - 彩色报告 - 保存为pdf" do
     month = 10
 
-    %{save_as: save_as, report: report} =
+    %{export_to: export_to, report: report} =
       month
       |> Reports.monthly_report()
       |> Reports.make_colorful_and_fun()
@@ -69,7 +69,7 @@ defmodule SolidTest do
     assert title == "monthly_report"
     assert content == month
     assert format == "colorful"
-    assert save_as == "pdf"
+    assert export_to == "pdf"
   end
 
   test "生成年度报告" do
@@ -108,7 +108,7 @@ defmodule SolidTest do
   test "生成年度报告 - 彩色报告 - 保存为doc" do
     year = 2019
 
-    %{save_as: save_as, report: report} =
+    %{export_to: export_to, report: report} =
       year
       |> Reports.annual_report()
       |> Reports.make_colorful_and_fun()
@@ -119,13 +119,13 @@ defmodule SolidTest do
     assert title == "annual_report"
     assert content == year
     assert format == "colorful"
-    assert save_as == "doc"
+    assert export_to == "doc"
   end
 
   test "生成年度报告 - 彩色报告 - 保存为pdf" do
     year = 2019
 
-    %{save_as: save_as, report: report} =
+    %{export_to: export_to, report: report} =
       year
       |> Reports.annual_report()
       |> Reports.make_colorful_and_fun()
@@ -136,6 +136,6 @@ defmodule SolidTest do
     assert title == "annual_report"
     assert content == year
     assert format == "colorful"
-    assert save_as == "pdf"
+    assert export_to == "pdf"
   end
 end
