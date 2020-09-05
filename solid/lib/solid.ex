@@ -57,20 +57,9 @@ defmodule Reports.Export do
 end
 
 defmodule Reports.Decoration do
-  #  # 代表正式形式的报告
-  #  def make_formal(%Reports.Report{} = report) do
-  #    Map.put(report, :format, "formal")
-  #  end
-
-#  # 生成彩色报告
-#  def make_colorful(%Reports.Report{} = report) do
-#    new_report = make_fun(report)
-#    Map.put(new_report, :format, "colorful")
-#  end
 
   # 填充彩色报告
   def make_fun(%Reports.Report{} = report) do
-    # ?干啥的？
-    report
+     Map.put(report, :format, "fun")
   end
 end

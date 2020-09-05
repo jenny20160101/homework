@@ -35,7 +35,7 @@ defmodule SolidTest do
 
     assert header == "monthly_report"
     assert body == month
-    assert format == "colorful"
+    assert format == "fun"
   end
 
   test "生成月度报告 - 彩色报告 - 保存为doc" do
@@ -52,7 +52,7 @@ defmodule SolidTest do
 
     assert header == "monthly_report"
     assert body == month
-    assert format == "colorful"
+    assert format == "fun"
     assert export_to == "doc"
   end
 
@@ -70,7 +70,7 @@ defmodule SolidTest do
 
     assert header == "monthly_report"
     assert body == month
-    assert format == "colorful"
+    assert format == "fun"
     assert export_to == "pdf"
   end
 
@@ -105,7 +105,7 @@ defmodule SolidTest do
 
     assert header == "annual_report"
     assert body == year
-    assert format == "colorful"
+    assert format == "fun"
   end
 
   test "生成年度报告 - 彩色报告 - 保存为doc" do
@@ -122,7 +122,7 @@ defmodule SolidTest do
 
     assert header == "annual_report"
     assert body == year
-    assert format == "colorful"
+    assert format == "fun"
     assert export_to == "doc"
   end
 
@@ -140,7 +140,7 @@ defmodule SolidTest do
 
     assert header == "annual_report"
     assert body == year
-    assert format == "colorful"
+    assert format == "fun"
     assert export_to == "pdf"
   end
 end
