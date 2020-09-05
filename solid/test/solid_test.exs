@@ -46,7 +46,7 @@ defmodule SolidTest do
       |> Reports.monthly_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Export.to_doc()
+      |> Export.to_file(:doc)
 
     %Report{title: title, content: content, format: format} = report
 
@@ -64,7 +64,7 @@ defmodule SolidTest do
       |> Reports.monthly_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Export.to_pdf()
+      |> Export.to_file(:pdf)
 
     %Report{title: title, content: content, format: format} = report
 
@@ -116,7 +116,7 @@ defmodule SolidTest do
       |> Reports.annual_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Export.to_doc()
+      |> Export.to_file(:doc)
 
     %Report{title: title, content: content, format: format} = report
 
@@ -134,7 +134,7 @@ defmodule SolidTest do
       |> Reports.annual_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Export.to_pdf()
+      |> Export.to_file(:pdf)
 
     %Report{title: title, content: content, format: format} = report
 
