@@ -23,13 +23,39 @@ defmodule Reports do
     Map.put(report, :format, "colorful")
   end
 
-  # 将报告保存到doc文件中
-  def save_as_doc(%Report{} = report) do
+  #  # 将报告保存到doc文件中
+  #  def save_as_doc(%Report{} = report) do
+  #    %{save_as: "doc", report: report}
+  #  end
+  #
+  #  # 将报告数据保存到pdf文件中
+  #  def save_as_pdf(%Report{} = report) do
+  #    %{save_as: "pdf", report: report}
+  #  end
+end
+
+defmodule Reports.Export do
+  # 将报告导出到doc文件
+  def to_doc(%Report{} = report) do
     %{save_as: "doc", report: report}
   end
 
-  # 将报告数据保存到pdf文件中
-  def save_as_pdf(%Report{} = report) do
+  # 将报告导出到pdf文件
+  def to_pdf(%Report{} = report) do
     %{save_as: "pdf", report: report}
+  end
+end
+
+defmodule Reports.Decoration do
+  # 代表正式形式的报告
+  def make_formal(report) do
+  end
+
+  # 生成彩色报告
+  def make_colorful(report) do
+  end
+
+  # 填充彩色报告
+  def make_fun(report) do
   end
 end
