@@ -1,7 +1,3 @@
-# defmodule Report do
-#  defstruct [:header, :body, :format]
-# end
-
 # 创建Reports.Report模块以定义报告的类型和结构
 defmodule Reports.Report do
   @type t :: %{header: String.t(), body: String.t(), footer: String.t(), format: String.t()}
@@ -20,6 +16,14 @@ defmodule Reports.Decoration.FormalDecorator do
   # fills a report with diagrams
   def decorate(report) do
     Map.put(report, :format, "formal")
+  end
+end
+
+defmodule Reports.Decoration.ColorfulDecorator do
+  @behaviour Reports.Decoration.Decorator
+  # fills a report with diagrams
+  def decorate(report) do
+    Map.put(report, :format, "colorful")
   end
 end
 
@@ -58,11 +62,11 @@ defmodule Reports.Decoration do
   #    Map.put(report, :format, "formal")
   #  end
 
-  # 生成彩色报告
-  def make_colorful(%Reports.Report{} = report) do
-    new_report = make_fun(report)
-    Map.put(new_report, :format, "colorful")
-  end
+#  # 生成彩色报告
+#  def make_colorful(%Reports.Report{} = report) do
+#    new_report = make_fun(report)
+#    Map.put(new_report, :format, "colorful")
+#  end
 
   # 填充彩色报告
   def make_fun(%Reports.Report{} = report) do
