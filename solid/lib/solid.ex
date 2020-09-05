@@ -1,16 +1,37 @@
-defmodule Report do
-  defstruct [:title, :content, :format]
+# defmodule Report do
+#  defstruct [:header, :body, :format]
+# end
+
+# 创建Reports.Report模块以定义报告的类型和结构
+defmodule Reports.Report do
+  @type t :: %{header: String.t(), body: String.t(), footer: String.t(), format: String.t()}
+  defstruct ~w(header body footer format)a
+end
+
+# 在Decorator行为的定义中使用了Report 的类型
+defmodule Reports.Decoration.Decorator do
+  @type t :: module()
+  @callback decorate(Reports.Report.t()) :: Reports.Report.t()
+end
+
+# 使用behaviour 去实现我们的期望的行为
+defmodule Reports.Decoration.FormalDecorator do
+  @behaviour Reports.Decoration.Decorator
+  # fills a report with diagrams
+  def decorate(report) do
+    Map.put(report, :format, "formal")
+  end
 end
 
 defmodule Reports do
   # 生成月度报告数据
   def monthly_report(month) do
-    %Report{title: "monthly_report", content: month}
+    %Reports.Report{header: "monthly_report", body: month}
   end
 
   # 生成年度报告数据
   def annual_report(year) do
-    %Report{title: "annual_report", content: year}
+    %Reports.Report{header: "annual_report", body: year}
   end
 end
 
@@ -32,19 +53,19 @@ defmodule Reports.Export do
 end
 
 defmodule Reports.Decoration do
-  # 代表正式形式的报告
-  def make_formal(%Report{} = report) do
-    Map.put(report, :format, "formal")
-  end
+  #  # 代表正式形式的报告
+  #  def make_formal(%Reports.Report{} = report) do
+  #    Map.put(report, :format, "formal")
+  #  end
 
   # 生成彩色报告
-  def make_colorful(%Report{} = report) do
+  def make_colorful(%Reports.Report{} = report) do
     new_report = make_fun(report)
     Map.put(new_report, :format, "colorful")
   end
 
   # 填充彩色报告
-  def make_fun(%Report{} = report) do
+  def make_fun(%Reports.Report{} = report) do
     # ?干啥的？
     report
   end
