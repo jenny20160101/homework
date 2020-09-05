@@ -1,8 +1,8 @@
 defmodule SolidTest do
   use ExUnit.Case
   alias Reports
-  alias Reports.{Decoration, Export, Report}
-  alias Reports.Decoration.{FormalDecorator, ColorfulDecorator}
+  alias Reports.{Export, Report}
+  alias Reports.Decoration.{FormalDecorator, ColorfulDecorator, FunDecorator}
 
   test "生成月度报告" do
     month = 10
@@ -31,7 +31,7 @@ defmodule SolidTest do
       month
       |> Reports.monthly_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
 
     assert header == "monthly_report"
     assert body == month
@@ -45,7 +45,7 @@ defmodule SolidTest do
       month
       |> Reports.monthly_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
       |> Export.to_file(:doc)
 
     %Report{header: header, body: body, format: format} = report
@@ -63,7 +63,7 @@ defmodule SolidTest do
       month
       |> Reports.monthly_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
       |> Export.to_file(:pdf)
 
     %Report{header: header, body: body, format: format} = report
@@ -101,7 +101,7 @@ defmodule SolidTest do
       year
       |> Reports.annual_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
 
     assert header == "annual_report"
     assert body == year
@@ -115,7 +115,7 @@ defmodule SolidTest do
       year
       |> Reports.annual_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
       |> Export.to_file(:doc)
 
     %Report{header: header, body: body, format: format} = report
@@ -133,7 +133,7 @@ defmodule SolidTest do
       year
       |> Reports.annual_report()
       |> ColorfulDecorator.decorate()
-      |> Decoration.make_fun()
+      |> FunDecorator.decorate()
       |> Export.to_file(:pdf)
 
     %Report{header: header, body: body, format: format} = report

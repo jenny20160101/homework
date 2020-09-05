@@ -27,6 +27,14 @@ defmodule Reports.Decoration.ColorfulDecorator do
   end
 end
 
+defmodule Reports.Decoration.FunDecorator do
+  @behaviour Reports.Decoration.Decorator
+  # fills a report with diagrams
+  def decorate(report) do
+    Map.put(report, :format, "fun")
+  end
+end
+
 defmodule Reports do
   # 生成月度报告数据
   def monthly_report(month) do
@@ -53,13 +61,5 @@ defmodule Reports.Export do
   # 将报告导出为默认文件类型
   def to_file(report, format) do
     %{export_to: format, report: report}
-  end
-end
-
-defmodule Reports.Decoration do
-
-  # 填充彩色报告
-  def make_fun(%Reports.Report{} = report) do
-     Map.put(report, :format, "fun")
   end
 end
