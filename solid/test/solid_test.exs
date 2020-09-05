@@ -2,6 +2,7 @@ defmodule SolidTest do
   use ExUnit.Case
   # doctest Solid
   alias Reports
+  alias Reports.Decoration
   alias Reports.Export
   alias Report
 
@@ -18,7 +19,7 @@ defmodule SolidTest do
     %Report{title: title, content: content, format: format} =
       month
       |> Reports.monthly_report()
-      |> Reports.make_formal()
+      |> Decoration.make_formal()
 
     assert title == "monthly_report"
     assert content == month
@@ -31,7 +32,8 @@ defmodule SolidTest do
     %Report{title: title, content: content, format: format} =
       month
       |> Reports.monthly_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
 
     assert title == "monthly_report"
     assert content == month
@@ -44,7 +46,8 @@ defmodule SolidTest do
     %{export_to: export_to, report: report} =
       month
       |> Reports.monthly_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
       |> Reports.Export.to_doc()
 
     %Report{title: title, content: content, format: format} = report
@@ -61,7 +64,8 @@ defmodule SolidTest do
     %{export_to: export_to, report: report} =
       month
       |> Reports.monthly_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
       |> Reports.Export.to_pdf()
 
     %Report{title: title, content: content, format: format} = report
@@ -85,7 +89,7 @@ defmodule SolidTest do
     %Report{title: title, content: content, format: format} =
       year
       |> Reports.annual_report()
-      |> Reports.make_formal()
+      |> Decoration.make_formal()
 
     assert title == "annual_report"
     assert content == year
@@ -98,7 +102,8 @@ defmodule SolidTest do
     %Report{title: title, content: content, format: format} =
       year
       |> Reports.annual_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
 
     assert title == "annual_report"
     assert content == year
@@ -111,7 +116,8 @@ defmodule SolidTest do
     %{export_to: export_to, report: report} =
       year
       |> Reports.annual_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
       |> Reports.Export.to_doc()
 
     %Report{title: title, content: content, format: format} = report
@@ -128,7 +134,8 @@ defmodule SolidTest do
     %{export_to: export_to, report: report} =
       year
       |> Reports.annual_report()
-      |> Reports.make_colorful_and_fun()
+      |> Decoration.make_colorful()
+      |> Decoration.make_fun()
       |> Reports.Export.to_pdf()
 
     %Report{title: title, content: content, format: format} = report

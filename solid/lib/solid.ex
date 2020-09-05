@@ -13,16 +13,15 @@ defmodule Reports do
     %Report{title: "annual_report", content: year}
   end
 
-  # 代表正式形式的报告
-  def make_formal(%Report{} = report) do
-    Map.put(report, :format, "formal")
-  end
+  #  # 代表正式形式的报告
+  #  def make_formal(%Report{} = report) do
+  #    Map.put(report, :format, "formal")
+  #  end
 
-  # 代表有色彩的报告
-  def make_colorful_and_fun(%Report{} = report) do
-    Map.put(report, :format, "colorful")
-  end
-
+  #  # 代表有色彩的报告
+  #  def make_colorful_and_fun(%Report{} = report) do
+  #    Map.put(report, :format, "colorful")
+  #  end
 end
 
 defmodule Reports.Export do
@@ -39,14 +38,19 @@ end
 
 defmodule Reports.Decoration do
   # 代表正式形式的报告
-  def make_formal(report) do
+  def make_formal(%Report{} = report) do
+    Map.put(report, :format, "formal")
   end
 
   # 生成彩色报告
-  def make_colorful(report) do
+  def make_colorful(%Report{} = report) do
+    new_report = make_fun(report)
+    Map.put(new_report, :format, "colorful")
   end
 
   # 填充彩色报告
-  def make_fun(report) do
+  def make_fun(%Report{} = report) do
+    # ?干啥的？
+    report
   end
 end
