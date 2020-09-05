@@ -12,16 +12,6 @@ defmodule Reports do
   def annual_report(year) do
     %Report{title: "annual_report", content: year}
   end
-
-  #  # 代表正式形式的报告
-  #  def make_formal(%Report{} = report) do
-  #    Map.put(report, :format, "formal")
-  #  end
-
-  #  # 代表有色彩的报告
-  #  def make_colorful_and_fun(%Report{} = report) do
-  #    Map.put(report, :format, "colorful")
-  #  end
 end
 
 defmodule Reports.Export do
