@@ -23,15 +23,6 @@ defmodule Reports do
     Map.put(report, :format, "colorful")
   end
 
-  #  # 将报告保存到doc文件中
-  #  def save_as_doc(%Report{} = report) do
-  #    %{export_to: "doc", report: report}
-  #  end
-  #
-  #  # 将报告数据保存到pdf文件中
-  #  def save_as_pdf(%Report{} = report) do
-  #    %{export_to: "pdf", report: report}
-  #  end
 end
 
 defmodule Reports.Export do
