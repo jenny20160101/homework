@@ -1,9 +1,7 @@
 defmodule SolidTest do
   use ExUnit.Case
-  # doctest Solid
   alias Reports
-  alias Reports.Decoration
-  alias Reports.Export
+  alias Reports.{Decoration, Export}
   alias Report
 
   test "生成月度报告" do
@@ -48,7 +46,7 @@ defmodule SolidTest do
       |> Reports.monthly_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Reports.Export.to_doc()
+      |> Export.to_doc()
 
     %Report{title: title, content: content, format: format} = report
 
@@ -66,7 +64,7 @@ defmodule SolidTest do
       |> Reports.monthly_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Reports.Export.to_pdf()
+      |> Export.to_pdf()
 
     %Report{title: title, content: content, format: format} = report
 
@@ -118,7 +116,7 @@ defmodule SolidTest do
       |> Reports.annual_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Reports.Export.to_doc()
+      |> Export.to_doc()
 
     %Report{title: title, content: content, format: format} = report
 
@@ -136,7 +134,7 @@ defmodule SolidTest do
       |> Reports.annual_report()
       |> Decoration.make_colorful()
       |> Decoration.make_fun()
-      |> Reports.Export.to_pdf()
+      |> Export.to_pdf()
 
     %Report{title: title, content: content, format: format} = report
 
