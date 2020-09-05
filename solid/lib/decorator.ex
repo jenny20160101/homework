@@ -7,7 +7,6 @@ end
 # 使用behaviour 去实现我们的期望的行为
 defmodule Reports.Decoration.FormalDecorator do
   @behaviour Reports.Decoration.Decorator
-  # fills a report with diagrams
   def decorate(report) do
     Map.put(report, :format, "formal")
   end
@@ -15,7 +14,6 @@ end
 
 defmodule Reports.Decoration.ColorfulDecorator do
   @behaviour Reports.Decoration.Decorator
-  # fills a report with diagrams
   def decorate(report) do
     Map.put(report, :format, "colorful")
   end
@@ -23,7 +21,6 @@ end
 
 defmodule Reports.Decoration.FunDecorator do
   @behaviour Reports.Decoration.Decorator
-  # fills a report with diagrams
   def decorate(report) do
     Map.put(report, :format, "fun")
   end

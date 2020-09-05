@@ -9,8 +9,8 @@ defmodule Reports.Export do
     %{export_to: "pdf", report: report}
   end
 
-  # 将报告导出为默认文件类型
-  def to_file(report, format) do
+  # 将报告导出为默认文件类型：doc
+  def to_file(report, format \\ :doc) do
     %{export_to: format, report: report}
   end
 end
