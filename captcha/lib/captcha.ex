@@ -3,16 +3,19 @@ defmodule Captcha do
   Documentation for `Captcha`.
   """
 
-  @doc """
-  Hello world.
+  def new(phone, code) do
+    %{phone: phone, code: code}
+  end
 
-  ## Examples
+  def verify(%{phone: phone, code: code} = captcha, phone, code) do
+    {:ok, captcha}
+  end
 
-      iex> Captcha.hello()
-      :world
+  def verify(%{phone: phone} = captcha, phone, _code) do
+    {:mismatched, captcha}
+  end
 
-  """
-  def hello do
-    :world
+  def verify(captcha, _phone, _code) do
+    {:captcha_expired, captcha}
   end
 end
