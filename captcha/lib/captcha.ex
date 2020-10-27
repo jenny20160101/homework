@@ -7,9 +7,14 @@ defmodule Captcha do
     %{phone: phone, code: code, remaining: 3}
   end
 
-  def verify(%{phone: phone, code: code} = captcha, phone, code) do
+  def verify(%{phone: phone, code: code, remaining: remaining} = captcha, phone, code)
+      when remaining > 0 do
     new_captcha = decrease_remaining(captcha)
     {:ok, new_captcha}
+  end
+
+  def verify(%{phone: phone, remaining: remaining} = captcha, phone, _code) when remaining == 0 do
+    {:captcha_expired, captcha}
   end
 
   def verify(%{phone: phone} = captcha, phone, _code) do
