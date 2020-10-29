@@ -99,36 +99,38 @@ defmodule CaptchaTest do
       assert {:ok, _captcha3} = Captcha.verify(captcha2, @phone, @code)
     end
 
-    test "should return :captcha_expired with 4 times verifies on matched phone and code", %{captcha: captcha} do
+    test "should return :captcha_expired with 4 times verifies on matched phone and code", %{
+      captcha: captcha
+    } do
       assert {:ok, captcha1} = Captcha.verify(captcha, @phone, @code)
       assert {:ok, captcha2} = Captcha.verify(captcha1, @phone, @code)
       assert {:ok, captcha3} = Captcha.verify(captcha2, @phone, @code)
       assert {:captcha_expired, captcha3} = Captcha.verify(captcha3, @phone, @code)
     end
 
-
-    test "should return :mismatched with 4 times verifies with unmatched  code", %{captcha: captcha} do
-      assert {:mismatched, captcha1} = Captcha.verify(captcha, @phone, @code<>"1")
-      assert {:mismatched, captcha2} = Captcha.verify(captcha1, @phone, @code<>"1")
-      assert {:mismatched, captcha3} = Captcha.verify(captcha2, @phone, @code<>"1")
-      assert {:captcha_expired, captcha3} = Captcha.verify(captcha3, @phone, @code<>"1")
+    test "should return :mismatched with 4 times verifies with unmatched  code", %{
+      captcha: captcha
+    } do
+      assert {:mismatched, captcha1} = Captcha.verify(captcha, @phone, @code <> "1")
+      assert {:mismatched, captcha2} = Captcha.verify(captcha1, @phone, @code <> "1")
+      assert {:mismatched, captcha3} = Captcha.verify(captcha2, @phone, @code <> "1")
+      assert {:captcha_expired, captcha3} = Captcha.verify(captcha3, @phone, @code <> "1")
     end
 
-
-    test "should return :mismatched with 4 times verifies with unmatched  phone", %{captcha: captcha} do
-      assert {:captcha_expired, captcha1} = Captcha.verify(captcha, @phone<>"1", @code)
-      assert {:captcha_expired, captcha2} = Captcha.verify(captcha1, @phone<>"1", @code)
-      assert {:captcha_expired, captcha3} = Captcha.verify(captcha2, @phone<>"1", @code)
-      assert {:captcha_expired, captcha3} = Captcha.verify(captcha3, @phone<>"1", @code)
+    test "should return :mismatched with 4 times verifies with unmatched  phone", %{
+      captcha: captcha
+    } do
+      assert {:captcha_expired, captcha1} = Captcha.verify(captcha, @phone <> "1", @code)
+      assert {:captcha_expired, captcha2} = Captcha.verify(captcha1, @phone <> "1", @code)
+      assert {:captcha_expired, captcha3} = Captcha.verify(captcha2, @phone <> "1", @code)
+      assert {:captcha_expired, captcha3} = Captcha.verify(captcha3, @phone <> "1", @code)
     end
-
-
 
     test "should return :ok on last verify", %{captcha: captcha} do
       assert {:ok, captcha1} = Captcha.verify(captcha, @phone, @code)
       assert {:ok, captcha1} = Captcha.verify(captcha, @phone, @code)
-      assert {:captcha_expired, captcha2} = Captcha.verify(captcha1, @phone<>"1", @code)
-      assert {:captcha_expired, captcha3} = Captcha.verify(captcha2, @phone<>"1", @code)
+      assert {:captcha_expired, captcha2} = Captcha.verify(captcha1, @phone <> "1", @code)
+      assert {:captcha_expired, captcha3} = Captcha.verify(captcha2, @phone <> "1", @code)
       assert {:ok, captcha3} = Captcha.verify(captcha3, @phone, @code)
     end
   end

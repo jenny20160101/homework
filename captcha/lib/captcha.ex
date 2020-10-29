@@ -7,25 +7,25 @@ defmodule Captcha do
     %{phone: phone, code: code, remaining: 3}
   end
 
-#  phone code  都正确
+  #  phone code  都正确
   def verify(%{phone: phone, code: code, remaining: remaining} = captcha, phone, code)
       when remaining > 0 do
     new_captcha = decrease_remaining(captcha)
     {:ok, new_captcha}
   end
 
-#  phone 正确 ，次数 =0
+  #  phone 正确 ，次数 =0
   def verify(%{phone: phone, remaining: remaining} = captcha, phone, _code) when remaining == 0 do
     {:captcha_expired, captcha}
   end
 
-#  phone 正确，次数 > 0
+  #  phone 正确，次数 > 0
   def verify(%{phone: phone, remaining: remaining} = captcha, phone, _code) when remaining > 0 do
     new_captcha = decrease_remaining(captcha)
     {:mismatched, new_captcha}
   end
 
-#  phone 不正确
+  #  phone 不正确
   def verify(captcha, _phone, _code) do
     {:captcha_expired, captcha}
   end
