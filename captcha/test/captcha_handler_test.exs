@@ -73,6 +73,7 @@ defmodule CaptchaHandlerTest do
     end
   end
 
+  #Task的说明： https://hexdocs.pm/elixir/master/Task.html
   describe "verify with concurrency" do
     test "should got 3 :ok for 3 concurrency invoke", %{handler: captchaHandler} do
       assert [:ok, :ok, :ok] ==
@@ -82,6 +83,19 @@ defmodule CaptchaHandlerTest do
                  Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code) end)
                ]
                |> Task.await_many()
+    end
+
+    test "concurrency with mix cases", %{handler: captchaHandler} do
+      result =
+        [
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code) end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code <> "1") end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone <> "1", @code) end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code) end)
+        ]
+        |> Task.await_many()
+
+      assert [] = result -- [:ok, :ok, :mismatched, :captcha_expired]
     end
   end
 end
