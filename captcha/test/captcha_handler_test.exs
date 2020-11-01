@@ -83,5 +83,18 @@ defmodule CaptchaHandlerTest do
                ]
                |> Task.await_many()
     end
+
+    test "concurrency with mix cases", %{handler: captchaHandler} do
+      result =
+        [
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code) end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code <> "1") end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone <> "1", @code) end),
+          Task.async(fn -> CaptchaHandler.verify(captchaHandler, @phone, @code) end)
+        ]
+        |> Task.await_many()
+
+      assert [] = result -- [:ok, :ok, :mismatched, :captcha_expired]
+    end
   end
 end
