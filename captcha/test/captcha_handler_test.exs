@@ -73,7 +73,7 @@ defmodule CaptchaHandlerTest do
     end
   end
 
-  #Task的说明： https://hexdocs.pm/elixir/master/Task.html
+  # Task的说明： https://hexdocs.pm/elixir/master/Task.html
   describe "verify with concurrency" do
     test "should got 3 :ok for 3 concurrency invoke", %{handler: captchaHandler} do
       assert [:ok, :ok, :ok] ==

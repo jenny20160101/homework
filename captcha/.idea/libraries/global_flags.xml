@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="global_flags" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/test/lib/global_flags/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/global_flags/src" />
+    </SOURCES>
+  </library>
+</component>
