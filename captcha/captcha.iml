@@ -7,6 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/global_flags" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/local_cluster" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
       <excludeFolder url="file://$MODULE_DIR$/cover" />
@@ -14,6 +16,10 @@
       <excludeFolder url="file://$MODULE_DIR$/doc" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
     </content>
+    <orderEntry type="jdk" jdkName="Erlang for Elixir 23" jdkType="Erlang SDK for Elixir SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="local_cluster" level="project" />
+    <orderEntry type="library" name="global_flags" level="project" />
+    <orderEntry type="library" name="ex_doc" level="project" />
   </component>
 </module>

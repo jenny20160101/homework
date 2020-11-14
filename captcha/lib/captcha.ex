@@ -27,7 +27,7 @@ defmodule Captcha do
 
   #  phone 不正确
   def verify(captcha, _phone, _code) do
-    IO.inspect(captcha, label: "captcha1x:")
+    #    IO.inspect(captcha, label: "captcha1x:")
     {:captcha_expired, captcha}
   end
 

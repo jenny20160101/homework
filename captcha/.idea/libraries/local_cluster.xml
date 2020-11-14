@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="local_cluster" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/test/lib/local_cluster/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/local_cluster/lib" />
+    </SOURCES>
+  </library>
+</component>
