@@ -6,13 +6,30 @@ defmodule LiveViewTodosWeb.TodoLive do
   #https://dennisbeatty.com/how-to-create-a-todo-list-with-phoenix-liveview.html
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, todos: Todos.list_todos())}
+#    {:ok, assign(socket, todos: Todos.list_todos())}
+  Todos.subscribe()
+
+  {:ok, fetch(socket)}
+
+  end
+
+  def handle_info({Todos, [:todo | _], _}, socket) do
+    {:noreply, fetch(socket)}
   end
 
   def handle_event("add", %{"todo" => todo}, socket) do
     Todos.create_todo(todo)
 
     {:noreply, fetch(socket)}
+  end
+
+
+  def handle_event("toggle_done", %{"id" => id}, socket) do
+    todo = Todos.get_todo!(id)
+    Todos.update_todo(todo, %{done: !todo.done})
+
+#    {:noreply, fetch(socket)}
+    {:noreply, socket}
   end
 
   defp fetch(socket) do
