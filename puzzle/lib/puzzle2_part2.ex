@@ -1,6 +1,6 @@
-defmodule Puzzle2 do
+defmodule Puzzle2_part2 do
   @moduledoc """
-  Documentation for `Puzzle`.
+  Documentation for `Puzzle2_part2`.
   """
 
   def check_pwd_in_file() do
@@ -13,7 +13,7 @@ defmodule Puzzle2 do
 
     # 将list中的每一项 改为key value 3-4 b: lbbbbntqswsv
     Enum.map(pwd_list1, fn x -> convert_line_content(x) end)
-    #    |> IO.inspect(Label: "list:", pretty: true)
+        |> IO.inspect(Label: "list:", pretty: true)
     |> valid_pwd_count()
   end
 
@@ -25,35 +25,31 @@ defmodule Puzzle2 do
     #    IO.inspect(pwd, Lable: "pwd", pretty: true)
 
     times_list = String.split(times, "-")
-    from_times = List.first(times_list)
-    to_times = List.last(times_list)
-    #    IO.inspect(from_times, Lable: "from_times", pretty: true)
-    #    IO.inspect(to_times, Lable: "to_times", pretty: true)
+    position1 = List.first(times_list)
+    position2 = List.last(times_list)
+    #    IO.inspect(position1, Lable: "position1", pretty: true)
+    #    IO.inspect(position2, Lable: "position2", pretty: true)
 
     %{
-      from_times: String.to_integer(from_times),
-      to_times: String.to_integer(to_times),
+      position1: String.to_integer(position1),
+      position2: String.to_integer(position2),
       find_char: String.trim(find_char, ":"),
       pwd: pwd
     }
   end
 
-  def find_char_count(subject, find_char) do
-    subject_length_exclude_find_char = String.replace(subject, find_char, "") |> String.length()
-    String.length(subject) - subject_length_exclude_find_char
-  end
-
   def check_pwd(%{
-        from_times: from_times,
-        to_times: to_times,
+        position1: position1,
+        position2: position2,
         find_char: find_char,
         pwd: pwd
       }) do
-    count = find_char_count(pwd, find_char)
-    count >= from_times && count <= to_times
+    String.slice(pwd, position1 - 1, 1) == find_char ||
+      String.slice(pwd, position2 - 1, 1) == find_char
   end
 
   def valid_pwd_count(input_list) do
-    Enum.filter(input_list, fn x -> check_pwd(x) == true end) |> Enum.count()
+    Enum.filter(input_list, fn x -> check_pwd(x) == true end)
+    |> Enum.count()
   end
 end

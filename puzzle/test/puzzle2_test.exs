@@ -97,6 +97,6 @@ defmodule Puzzle2Test do
   end
 
   test "check input file" do
-    assert Puzzle2.check_pwd_in_file == 586
+    assert Puzzle2.check_pwd_in_file() == 586
   end
 end
