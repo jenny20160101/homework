@@ -11,9 +11,9 @@ defmodule Puzzle2_part2 do
     pwd_list1 = String.split(file_content, "\n")
     #    IO.inspect(pwd_list1, Label: "pwd_list1:", pretty: true)
 
-    # 将list中的每一项 改为key value 3-4 b: lbbbbntqswsv
+    # 将list中的每一项 改为 map
     Enum.map(pwd_list1, fn x -> convert_line_content(x) end)
-        |> IO.inspect(Label: "list:", pretty: true)
+    |> IO.inspect(Label: "list:", pretty: true)
     |> valid_pwd_count()
   end
 
