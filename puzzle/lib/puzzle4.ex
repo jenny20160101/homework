@@ -18,12 +18,11 @@ defmodule Puzzle4 do
     !Enum.any?(property_list, fn x -> String.match?(x, ~r/cid/) end)
   end
 
-  def count_valid_passport(file_path)
-    do
+  def count_valid_passport(file_path) do
     {:ok, file_content} = File.read(file_path)
 
     passport_list = String.split(file_content, "\n\n")
 
-    Enum.filter(passport_list, fn x-> is_valid_passport(x) end) |> Enum.count()
+    Enum.filter(passport_list, fn x -> is_valid_passport(x) end) |> Enum.count()
   end
 end

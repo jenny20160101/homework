@@ -66,7 +66,6 @@ iyr:2011 ecl:brn hgt:59in") == false
     assert Puzzle4.count_valid_passport("/data/homework/puzzle/lib/puzzle4_input_sample.txt") == 2
   end
 
-
   test "整个文档中 valid passport数量" do
     assert Puzzle4.count_valid_passport("/data/homework/puzzle/lib/puzzle4_input.txt") == 182
   end
