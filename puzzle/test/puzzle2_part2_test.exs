@@ -16,15 +16,28 @@ defmodule Puzzle2_part2Test do
   test "check pwd" do
     # 0个匹配
     assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-3 b: cdefg")) == false
-    IO.inspect(Puzzle2_part2.convert_line_content("1-2 b: laabbbbntqswsv") , label: "aaa:", pretty: true)
 
-    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-2 b: laabbbbntqswsv")) == false
+    IO.inspect(Puzzle2_part2.convert_line_content("1-2 b: laabbbbntqswsv"),
+      label: "aaa:",
+      pretty: true
+    )
+
+    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-2 b: laabbbbntqswsv")) ==
+             false
+
     # 1个匹配
     assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-3 a: abcde")) == true
-    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-2 b: lbbbbntqswsv")) == true
-    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("5-6 b: lbbbbntqswsv")) == true
+
+    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("1-2 b: lbbbbntqswsv")) ==
+             true
+
+    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("5-6 b: lbbbbntqswsv")) ==
+             true
+
     # 2个匹配
-    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-3 b: lbbbbntqswsv")) == true
+    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-3 b: lbbbbntqswsv")) ==
+             true
+
     assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-9 c: ccccccccc")) == true
   end
 
