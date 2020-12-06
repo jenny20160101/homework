@@ -1,4 +1,4 @@
-defmodule Puzzle2Test do
+defmodule Puzzle3Test do
   use ExUnit.Case
   doctest Puzzle3
 
@@ -13,8 +13,8 @@ defmodule Puzzle2Test do
 #.##...#...#.##...#...#.##...#...#.##...#...#.##...#...#.##...#...
 #...##....##...##....##...##....##...##....##...##....##...##....#
 .#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#"
-  @line_length_sample 31
-  @line_count_sample 323
+  @line_length 31
+  @line_count 323
 
   test "convert input file" do
     input_content = "........#....#..##..#...#.....#
@@ -76,25 +76,25 @@ defmodule Puzzle2Test do
   test "right three 会超过右边边界" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_three(1, @line_length_sample - 3) ==
+    assert Puzzle3.right_three(1, @line_length - 3) ==
              %{
                line: 1,
-               column: @line_length_sample
+               column: @line_length
              }
 
-    assert Puzzle3.right_three(1, @line_length_sample - 2) ==
+    assert Puzzle3.right_three(1, @line_length - 2) ==
              %{
                line: 1,
                column: 1
              }
 
-    assert Puzzle3.right_three(1, @line_length_sample - 1) ==
+    assert Puzzle3.right_three(1, @line_length - 1) ==
              %{
                line: 1,
                column: 2
              }
 
-    assert Puzzle3.right_three(1, @line_length_sample) ==
+    assert Puzzle3.right_three(1, @line_length) ==
              %{
                line: 1,
                column: 3
@@ -103,13 +103,13 @@ defmodule Puzzle2Test do
 
   test "down 1" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
-    assert Puzzle3.down_one(1, 3) == %{line: 2, column: 3}
-    assert Puzzle3.down_one(2, 7) == %{line: 3, column: 7}
+    assert Puzzle3.down_one(1, 3, @line_count) == %{line: 2, column: 3}
+    assert Puzzle3.down_one(2, 7, @line_count) == %{line: 3, column: 7}
   end
 
   test "down 1 最后一行，不能向下走了" do
-    assert Puzzle3.down_one(@line_count_sample, 1) == :finished
-    assert Puzzle3.down_one(@line_count_sample, 4) == :finished
+    assert Puzzle3.down_one(@line_count, 1, @line_count) == :finished
+    assert Puzzle3.down_one(@line_count, 4, @line_count) == :finished
   end
 
   test "right 3 down 1" do
@@ -125,17 +125,17 @@ defmodule Puzzle2Test do
   test "right 3：超过右边界，则地图向右复制一倍。可以使用 取模，重新回到第一列" do
     #      map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length_sample - 2) == %{
+    assert Puzzle3.right_3_and_down_1(1, @line_length - 2) == %{
              line: 2,
              column: 1
            }
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length_sample - 1) == %{
+    assert Puzzle3.right_3_and_down_1(1, @line_length - 1) == %{
              line: 2,
              column: 2
            }
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length_sample) == %{
+    assert Puzzle3.right_3_and_down_1(1, @line_length) == %{
              line: 2,
              column: 3
            }
@@ -144,14 +144,14 @@ defmodule Puzzle2Test do
   test "get_trace" do
     map_list = Puzzle3.convert_input_file_to_list(@input_sample)
     trace = Puzzle3.get_trace([%{line: 1, column: 1}], map_list)
-    assert Enum.count(trace) == @line_count_sample
+    assert Enum.count(trace) == @line_count
   end
 
   test "trees in trace" do
     assert Puzzle3.count_tree("/data/homework/puzzle/lib/puzzle3_input.txt") == 153
   end
 
-#  test "trees in trace sample" do
-#    assert Puzzle3.count_tree("/data/homework/puzzle/lib/puzzle3_input_sample.txt") == 7
-#  end
+  #  test "trees in trace sample" do
+  #    assert Puzzle3.count_tree("/data/homework/puzzle/lib/puzzle3_input_sample.txt") == 7
+  #  end
 end

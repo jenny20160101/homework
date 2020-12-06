@@ -3,6 +3,7 @@ defmodule Puzzle3 do
   Documentation for `Puzzle`.
   """
   @line_length 31
+  @line_count 323
 
   def count_tree(file_path) do
     {:ok, file_content} = File.read(file_path)
@@ -10,7 +11,7 @@ defmodule Puzzle3 do
 
     # 字符串转换为 list
     map_list = convert_input_file_to_list(file_content)
-    tree_count_in_trace( map_list)
+    tree_count_in_trace(map_list)
   end
 
   def get_trace(trace, map_list) do
@@ -36,23 +37,23 @@ defmodule Puzzle3 do
   end
 
   def right_three(line, column) do
-    new_column = (column + 3) |> adjust_column_when_exceed()
+    new_column = (column + 3) |> adjust_column_when_exceed(@line_length)
     %{line: line, column: new_column}
   end
 
-  def adjust_column_when_exceed(column) when column <= 31 do
+  def adjust_column_when_exceed(column, @line_length) when column <= @line_length do
     column
   end
 
-  def adjust_column_when_exceed(column) when column > 31 do
+  def adjust_column_when_exceed(column, @line_length) when column > @line_length do
     Integer.mod(column, @line_length)
   end
 
-  def down_one(line, _column) when line == 323 do
+  def down_one(line, _column, @line_count) when line == @line_count do
     :finished
   end
 
-  def down_one(line, column) do
+  def down_one(line, column, _) do
     new_line = line + 1
     %{line: new_line, column: column}
   end
@@ -61,13 +62,13 @@ defmodule Puzzle3 do
     line_content = Enum.at(map_list, line - 1)
 
     # IO.inspect(line_content, label: "is_tree_at_coordinate:line_content", pretty: true)
-    IO.inspect(line_content, label: "查看坐标数据，坐标数据，line_content", pretty: true)
-    IO.inspect("#{line}-#{column}", label: "查看坐标数据，坐标", pretty: true)
+    #    IO.inspect(line_content, label: "查看坐标数据，坐标数据，line_content", pretty: true)
+    #    IO.inspect("#{line}-#{column}", label: "查看坐标数据，坐标", pretty: true)
 
-#    IO.inspect(Enum.count(map_list),
-#      label: "is_tree_at_coordinate:Enum.count(map_list)",
-#      pretty: true
-#    )
+    #    IO.inspect(Enum.count(map_list),
+    #      label: "is_tree_at_coordinate:Enum.count(map_list)",
+    #      pretty: true
+    #    )
 
     if String.slice(line_content, column - 1, 1) == "#" do
       IO.inspect("#{line}-#{column}", label: "line:column", pretty: true)
@@ -86,11 +87,10 @@ defmodule Puzzle3 do
 
     %{line: line, column: column} = new_position
     # IO.inspect(result, label: "right_3_and_down_1  result", pretty: true)
-    down_one(line, column)
+    down_one(line, column, @line_count)
   end
 
   def tree_count_in_trace(map_list) do
-
     trace = get_trace([%{line: 1, column: 1}], map_list)
     IO.inspect(trace, label: "trace", pretty: true)
 
