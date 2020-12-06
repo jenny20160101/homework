@@ -4,16 +4,12 @@ defmodule Puzzle3 do
   """
   @line_length 31
 
-  def count_tree() do
-    {:ok, file_content} = File.read("/data/homework/puzzle/lib/puzzle3_input.txt")
+  def count_tree(file_path) do
+    {:ok, file_content} = File.read(file_path)
     #    #IO.inspect(file_content, Label: "file_content:", pretty: true)
 
     # 字符串转换为 list
     map_list = convert_input_file_to_list(file_content)
-    #    #IO.inspect(pwd_list1, Label: "pwd_list1:", pretty: true)
-
-    #    # 将list中的每一项 改为key value 3-4 b: lbbbbntqswsv
-
     tree_count_in_trace( map_list)
   end
 
@@ -97,8 +93,6 @@ defmodule Puzzle3 do
 
     trace = get_trace([%{line: 1, column: 1}], map_list)
     IO.inspect(trace, label: "trace", pretty: true)
-
-
 
     Enum.filter(trace, fn %{line: line, column: column} = _ ->
       is_tree_at_coordinate(map_list, line, column)

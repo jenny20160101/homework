@@ -147,13 +147,11 @@ defmodule Puzzle2Test do
     assert Enum.count(trace) == @line_count_sample
   end
 
-  #  test "trees in trace  --sample" do
-  #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
-  #    trace = Puzzle3.get_trace([%{line: 1, column: 1}], map_list)
-  #    assert Puzzle3.tree_count_in_trace(trace, map_list) == 7
-  #  end
-
   test "trees in trace" do
-    assert Puzzle3.count_tree() == 153
+    assert Puzzle3.count_tree("/data/homework/puzzle/lib/puzzle3_input.txt") == 153
   end
+
+#  test "trees in trace sample" do
+#    assert Puzzle3.count_tree("/data/homework/puzzle/lib/puzzle3_input_sample.txt") == 7
+#  end
 end
