@@ -9,12 +9,12 @@ defmodule Puzzle4 do
 
     case property_count do
       8 -> true
-      7 -> only_lack_cid(property_list)
+      7 -> lack_cid(property_list)
       _ -> false
     end
   end
 
-  def only_lack_cid(property_list) do
+  def lack_cid(property_list) do
     !Enum.any?(property_list, fn x -> String.match?(x, ~r/cid/) end)
   end
 
