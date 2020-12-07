@@ -1,4 +1,4 @@
-defmodule Puzzle4Test do
+defmodule Puzzle5Test do
   use ExUnit.Case
   doctest Puzzle5
 
