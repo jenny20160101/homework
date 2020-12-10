@@ -3,16 +3,16 @@ defmodule Puzzle7 do
   Documentation for `Puzzle`.
   """
 
-
-  def hold_shiny_gold_bag(line, color) do
-    String.match?(line, ~r/${#color}/)
+  def hold_bag(line, [_ | _] = color_list) do
+    Enum.any?(color_list, fn x -> hold_bag(line, x) == true end)
   end
 
-  def hold_shiny_gold_bag(line, [_|_] = contain_shiny_gold_bag_list) do
-    Enum.any?(contain_shiny_gold_bag_list, fn x->  end)
-    String.match?(line, ~r/shiny gold bag/)
+  def hold_bag(line, color) do
+    #    String.match?("shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.", ~r/^(?!shiny gold bag)(.*)shiny gold bag/)
+    IO.inspect(line, Label: "line:", pretty: true)
+    IO.inspect(color, Label: "color:", pretty: true)
+
+    {:ok, reg} = Regex.compile("^(?!" <> color <> ")(.*)" <> color)
+    String.match?(line, reg)
   end
-
-
-
 end

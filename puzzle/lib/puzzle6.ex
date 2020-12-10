@@ -18,7 +18,7 @@ defmodule Puzzle6 do
 
   def questions_in_groups(groups) do
     String.split(groups, "\n\n")
-    |>Enum.reduce(0, fn group, acc -> questions_in_group(group) + acc end)
+    |> Enum.reduce(0, fn group, acc -> questions_in_group(group) + acc end)
   end
 
   def questions_in_file(file_path) do
