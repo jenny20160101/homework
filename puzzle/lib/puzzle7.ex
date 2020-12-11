@@ -3,13 +3,18 @@ defmodule Puzzle7 do
   Documentation for `Puzzle`.
   """
 
-  def contain_bag(line, color) do
+  def contain_bag_directly(line, color) do
     {:ok, reg} = Regex.compile("^(?!" <> color <> ")(.*)" <> color)
     String.match?(line, reg)
   end
 
   def find_parent_bags(lines, color) do
-    line_list = Enum.filter(lines, fn line -> contain_bag(line, color) end)
+    IO.inspect("color", Label: "color", pretty: true)
+
+    line_list = Enum.filter(lines, fn line -> contain_bag_directly(line, color) end)
+
+    line_list |> IO.inspect(Label: "find_parent_bags---lines_list:", pretty: true)
+
     Enum.map(line_list, fn line -> extract_parent_bag_color(line) end)
   end
 
@@ -36,6 +41,7 @@ defmodule Puzzle7 do
 
   def ancestor_color_count(file_path, color) do
     {:ok, file_content} = File.read(file_path)
-    String.split(file_content, "\n") |> ancestor_color_count(color)
+    String.split(file_content, "\n")
+    |> ancestor_color_count(color)
   end
 end

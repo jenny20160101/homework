@@ -16,6 +16,4 @@ defmodule Puzzle67est do
              "shiny gold bag"
            ) == false
   end
-
-
 end
