@@ -36,7 +36,9 @@ defmodule Puzzle7Part1 do
 #        ~r/\d+(.)+ bag/
 #      )
 #
-#      Regex.run(
+      Regex.split(~r{(contain|,|\.)},  "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.")
+      Regex.split(~r{(contain|,|\.)},  "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.", trim: true)
+      #      Regex.run(
 #        ~r/\d+(.)+ bag/,
 #        "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags."
 #      )
