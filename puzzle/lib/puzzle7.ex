@@ -41,6 +41,7 @@ defmodule Puzzle7 do
 
   def ancestor_color_count(file_path, color) do
     {:ok, file_content} = File.read(file_path)
+
     String.split(file_content, "\n")
     |> ancestor_color_count(color)
   end

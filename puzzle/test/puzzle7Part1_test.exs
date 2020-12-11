@@ -1,19 +1,43 @@
-defmodule Puzzle67est do
+defmodule Puzzle7Part1Test do
   use ExUnit.Case
-  doctest Puzzle7
+  doctest Puzzle7Part1
 
-  test "直接包含shiny gold bag" do
-    assert Puzzle7.hold_bag("bright white bags contain 1 shiny gold bag.", "shiny gold bag") ==
-             true
+  @find_color_bag "shiny gold bag"
+  @lines [
+    "light red bags contain 1 bright white bag, 2 muted yellow bags.",
+    "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
+    "bright white bags contain 1 shiny gold bag.",
+    "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
+    "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
+    "dark olive bags contain 3 faded blue bags, 4 dotted black bags.",
+    "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.",
+    "faded blue bags contain no other bags.",
+    "dotted black bags contain no other bags."
+  ]
 
-    assert Puzzle7.hold_bag(
-             "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
-             "shiny gold bag"
+  test "直接包含@find_color_bag" do
+    assert Puzzle7Part1.contain_bag(
+             "bright white bags contain 1 shiny gold bag.",
+             @find_color_bag
            ) == true
 
-    assert Puzzle7.hold_bag(
-             "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
-             "shiny gold bag"
-           ) == false
+    assert Puzzle7Part1.contain_bag(
+             "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
+             @find_color_bag
+           ) == true
+  end
+
+  test "A 包含B，B包含@find_color_bag， 则A包含@find_color_bag" do
+    assert Puzzle7Part1.contain_bag(
+             "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
+             @find_color_bag,
+             @lines
+           ) == true
+
+    assert Puzzle7Part1.contain_bag(
+             "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
+             @find_color_bag,
+             @lines
+           ) == true
   end
 end
