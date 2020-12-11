@@ -2,31 +2,19 @@ defmodule Puzzle67est do
   use ExUnit.Case
   doctest Puzzle7
 
-  test "直接包含shiny gold bag" do
-    assert Puzzle7.hold_bag("bright white bags contain 1 shiny gold bag.", "shiny gold bag") ==
+  test "check 是否直接包含shiny gold bag" do
+    assert Puzzle7.contain_bag("bright white bags contain 1 shiny gold bag.", "shiny gold bag") ==
              true
 
-    assert Puzzle7.hold_bag(
+    assert Puzzle7.contain_bag(
              "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
              "shiny gold bag"
            ) == true
 
-    assert Puzzle7.hold_bag(
+    assert Puzzle7.contain_bag(
              "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
              "shiny gold bag"
            ) == false
-  end
-
-  test "儿子中 包含shiny gold bag" do
-    assert Puzzle7.hold_bag(
-             "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
-             ["bright white bag", "muted yellow bag"]
-           ) == true
-
-    assert Puzzle7.hold_bag(
-             "light red bags contain 1 bright white bag, 2 muted yellow bags.",
-             ["bright white bag", "muted yellow bag"]
-           ) == true
   end
 
   test "找到 shiny gold bag 的父亲" do
@@ -42,27 +30,27 @@ defmodule Puzzle67est do
       "dotted black bags contain no other bags."
     ]
 
-    assert Puzzle7.find_parent_bag(lines, "shiny gold bag") ==
+    assert Puzzle7.find_parent_bags(lines, "shiny gold bag") ==
              [
                "bright white bag",
                "muted yellow bag"
              ]
   end
 
-  test "找到父亲 color" do
-    assert Puzzle7.find_parent_bag_color("bright white bags contain 1 shiny gold bag.") ==
+  test "单行：提取 父亲bag的 color" do
+    assert Puzzle7.extract_parent_bag_color("bright white bags contain 1 shiny gold bag.") ==
              "bright white bag"
 
-    assert Puzzle7.find_parent_bag_color(
+    assert Puzzle7.extract_parent_bag_color(
              "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags."
            ) == "muted yellow bag"
 
-    assert Puzzle7.find_parent_bag_color(
+    assert Puzzle7.extract_parent_bag_color(
              "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags."
            ) == "shiny gold bag"
   end
 
-  test "找到 shiny gold bag 的父亲的 color list" do
+  test "多行：提取 父亲bag的 color" do
     lines = [
       "light red bags contain 1 bright white bag, 2 muted yellow bags.",
       "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
@@ -75,11 +63,11 @@ defmodule Puzzle67est do
       "dotted black bags contain no other bags."
     ]
 
-    assert Puzzle7.find_parent_bag(lines, "shiny gold bag") ==
+    assert Puzzle7.find_parent_bags(lines, "shiny gold bag") ==
              ["bright white bag", "muted yellow bag"]
   end
 
-  test "获取数量：list" do
+  test "获取父亲bag的数量，输入list" do
     lines = [
       "light red bags contain 1 bright white bag, 2 muted yellow bags.",
       "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
@@ -92,18 +80,18 @@ defmodule Puzzle67est do
       "dotted black bags contain no other bags."
     ]
 
-    assert Puzzle7.color_count(lines, "shiny gold bag") == 4
+    assert Puzzle7.ancestor_color_count(lines, "shiny gold bag") == 4
   end
 
-  test "获取数量：input_sample.txt" do
-    assert Puzzle7.color_count(
+  test "获取父亲bag的数量，输入txt：input_sample.txt" do
+    assert Puzzle7.ancestor_color_count(
              "/data/homework/puzzle/lib/puzzle7_input_sample.txt",
              "shiny gold bag"
            ) == 4
   end
 
-  test "获取数量：input.txt" do
-    assert Puzzle7.color_count("/data/homework/puzzle/lib/puzzle7_input.txt", "shiny gold bag") ==
+  test "获取父亲bag的数量，输入txt：input.txt" do
+    assert Puzzle7.ancestor_color_count("/data/homework/puzzle/lib/puzzle7_input.txt", "shiny gold bag") ==
              18
   end
 end
