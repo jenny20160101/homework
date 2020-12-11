@@ -19,8 +19,8 @@ defmodule Puzzle7Part1 do
     end
   end
 
-  def count_contain_bag([_|_] = lines, color) do
-    Enum.filter(lines, fn x_line-> contain_bag(x_line, color, lines) end)
+  def count_contain_bag([_ | _] = lines, color) do
+    Enum.filter(lines, fn x_line -> contain_bag(x_line, color, lines) end)
     |> IO.inspect(label: "count_contain_bag", pretty: true)
     |> Enum.count()
   end
