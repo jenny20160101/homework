@@ -2,7 +2,7 @@ defmodule Puzzle7Part2 do
   def extract_son_bags(line) do
     extract_son_bags_of_format_string(line)
     #    #      |> IO.inspect(label: "extract_son_bags1", pretty: true)
-    |> Enum.map(fn x -> format_bag_info(x) end)
+    |> Enum.map(&format_bag_info/1)
   end
 
   defp extract_son_bags_of_format_string(line) do
