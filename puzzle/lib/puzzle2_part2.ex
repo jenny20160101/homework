@@ -9,7 +9,7 @@ defmodule Puzzle2_part2 do
 
     # 字符串转换为 list
     pwd_list1 = String.split(file_content, "\n")
-    #    IO.inspect(pwd_list1, Label: "pwd_list1:", pretty: true)
+     IO.inspect(pwd_list1, Label: "pwd_list1:", pretty: true)
 
     # 将list中的每一项 改为 map
     Enum.map(pwd_list1, fn x -> convert_line_content(x) end)
@@ -43,9 +43,12 @@ defmodule Puzzle2_part2 do
         position2: position2,
         find_char: find_char,
         pwd: pwd
-      }) do
-    String.slice(pwd, position1 - 1, 1) == find_char ||
-      String.slice(pwd, position2 - 1, 1) == find_char
+      } = line) do
+#    IO.inspect(line, label: "line", pretty: true)
+
+    (String.slice(pwd, position1 - 1, 1) == find_char ||
+      String.slice(pwd, position2 - 1, 1) == find_char)
+#    |> IO.inspect(label: "check_pwd result", pretty: true)
   end
 
   def valid_pwd_count(input_list) do
