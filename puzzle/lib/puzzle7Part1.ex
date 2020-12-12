@@ -17,9 +17,9 @@ defmodule Puzzle7Part1 do
     else
       #       找到 line 包含的所有儿子 ，check儿子是否包含color
       extract_contained_colors(line)
-#      |> IO.inspect(label: "extract_contained_colors", pretty: true)
+      |> IO.inspect(label: "extract_contained_colors", pretty: true)
       |> Enum.map(fn x_color -> find_color_rule_line(x_color, all_lines) end)
-#      |> IO.inspect(label: "find_color_rule_line ", pretty: true)
+      |> IO.inspect(label: "find_color_rule_line ", pretty: true)
       |> Enum.any?(fn x_line -> contain_bag(x_line, color, all_lines) end)
     end
   end
