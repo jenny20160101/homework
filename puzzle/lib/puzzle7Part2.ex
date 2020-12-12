@@ -1,10 +1,8 @@
 defmodule Puzzle7Part2 do
   def extract_son_bags(line) do
     extract_son_bags_of_format_string(line)
-    #      |> IO.inspect(label: "extract_son_bags1", pretty: true)
-    |> Enum.map(fn bag_info_string ->
-      format_bag_info(bag_info_string)
-    end)
+#    #      |> IO.inspect(label: "extract_son_bags1", pretty: true)
+    |> Enum.map(fn x -> format_bag_info(x) end)
   end
 
   defp extract_son_bags_of_format_string(line) do
@@ -32,11 +30,11 @@ defmodule Puzzle7Part2 do
     son_bags_count = count_son_bags(line)
 
     Enum.reduce(son_bags_info, son_bags_count, fn bag_info, acc ->
-      IO.inspect(bag_info, label: "bag_info", pretty: true)
+#      IO.inspect(bag_info, label: "bag_info", pretty: true)
 
       son_count =
         find_color_rule_line(bag_info.color, lines)
-        |> IO.inspect(label: "find_color_rule_line", pretty: true)
+#        |> IO.inspect(label: "find_color_rule_line", pretty: true)
         |> count_contained_bags(lines)
 
       acc + son_count * bag_info.count
