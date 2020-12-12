@@ -112,7 +112,7 @@ defmodule Puzzle7Part1Test do
 
   @tag timeout: 600000
   test "所有直接or间接包含了某color bag的所有行，求行数：传入 input.txt" do
-       assert Puzzle7Part1.count_contain_bag("/data/homework/puzzle/lib/puzzle7_input.txt", @find_color_bag) == 18
+       assert Puzzle7Part1.count_contain_bag("/data/homework/puzzle/lib/puzzle7_input.txt", @find_color_bag) == 235
   end
 
   test "根据color 找到 color到定义行" do
