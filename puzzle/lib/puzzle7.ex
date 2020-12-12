@@ -9,18 +9,18 @@ defmodule Puzzle7 do
   end
 
   def find_parent_bags(lines, color) do
-    IO.inspect("color", Label: "color", pretty: true)
-
-    line_list = Enum.filter(lines, fn line -> contain_bag_directly(line, color) end)
-
-    line_list |> IO.inspect(Label: "find_parent_bags---lines_list:", pretty: true)
-
-    Enum.map(line_list, fn line -> extract_parent_bag_color(line) end)
+#    IO.inspect("color", Label: "color", pretty: true)
+    Enum.filter(lines, fn line -> contain_bag_directly(line, color) end)
+    |> IO.inspect(Label: "find_parent_bags---lines_list:", pretty: true)
+    |> Enum.map(fn line -> extract_parent_bag_color(line) end)
   end
 
   def find_ancestor_bags(lines, color) do
     parent_bags = find_parent_bags(lines, color)
-     Enum.reduce(parent_bags, parent_bags, fn bag_color, acc ->  find_ancestor_bags(lines, bag_color) ++ acc  end)
+
+    Enum.reduce(parent_bags, parent_bags, fn bag_color, acc ->
+      find_ancestor_bags(lines, bag_color) ++ acc
+    end)
   end
 
   def extract_parent_bag_color(line) do
@@ -30,16 +30,6 @@ defmodule Puzzle7 do
   end
 
   def ancestor_color_count([_ | _] = lines, color) do
-#    parent_color_list = find_parent_bags(lines, color)
-#    acc_init = parent_color_list
-#
-#    Enum.reduce(parent_color_list, acc_init, fn color, acc ->
-#      color_list = find_parent_bags(lines, color)
-#      IO.inspect(color_list, Label: "color_list1:", pretty: true)
-#      acc ++ color_list
-#    end)
-#    |> Enum.uniq()
-#    |> Enum.count()
     find_ancestor_bags(lines, color) |> Enum.uniq() |> Enum.count()
   end
 
