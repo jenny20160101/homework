@@ -61,6 +61,24 @@ defmodule Puzzle7Part1Test do
            ) == true
   end
 
+  test "A 包含B，B包含C, C包含@find_color_bag， 则A包含@find_color_bag" do
+    line1 = "jenny1 bags contain 1 dark orange bag."
+    line2 = "jenny2 bags contain 2 light red bags."
+    lines = @lines ++ [line1, line2]
+
+    assert Puzzle7Part1.contain_bag(
+             line1,
+             @find_color_bag,
+             lines
+           ) == true
+
+    assert Puzzle7Part1.contain_bag(
+             line2,
+             @find_color_bag,
+             lines
+           ) == true
+  end
+
   test "所有直接or间接包含了某color bag的所有行，求行数：传入line list" do
     assert Puzzle7Part1.count_contain_bag(@lines, @find_color_bag) == 4
   end

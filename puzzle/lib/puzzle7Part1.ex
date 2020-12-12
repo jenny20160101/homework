@@ -9,19 +9,24 @@ defmodule Puzzle7Part1 do
   end
 
   def contain_bag(line, color, [_ | _] = all_lines) do
+#    IO.inspect(line, label: "line", pretty: true)
+
     if contain_bag_directly(line, color) do
+#      IO.inspect(color, label: "contain_bag_directly", pretty: true)
       true
     else
       #       找到 line 包含的所有儿子 ，check儿子是否包含color
       extract_contained_colors(line)
+#      |> IO.inspect(label: "extract_contained_colors", pretty: true)
       |> Enum.map(fn x_color -> find_color_rule_line(x_color, all_lines) end)
-      |> Enum.any?(fn x_line -> contain_bag_directly(x_line, color) end)
+#      |> IO.inspect(label: "find_color_rule_line ", pretty: true)
+      |> Enum.any?(fn x_line -> contain_bag(x_line, color, all_lines) end)
     end
   end
 
   def count_contain_bag([_ | _] = lines, color) do
     Enum.filter(lines, fn x_line -> contain_bag(x_line, color, lines) end)
-    |> IO.inspect(label: "count_contain_bag", pretty: true)
+#    |> IO.inspect(label: "count_contain_bag", pretty: true)
     |> Enum.count()
   end
 
@@ -33,15 +38,15 @@ defmodule Puzzle7Part1 do
   end
 
   def extract_contained_colors(line) do
-    [head | tail] = Regex.split(~r{(contain|,|\.)}, line, trim: true)
+    [_head | tail] = Regex.split(~r{(contain|,|\.)}, line, trim: true)
 
     color_list =
       tail
-      |> IO.inspect(label: "extract_contained_colors1", pretty: true)
+#      |> IO.inspect(label: "extract_contained_colors1", pretty: true)
       |> Enum.map(fn x ->
         color =
           Regex.run(~r/\d+ (.+bag)/, x)
-          |> IO.inspect(label: "extract_contained_colors2", pretty: true)
+#          |> IO.inspect(label: "extract_contained_colors2", pretty: true)
 
         if color == nil do
           ""
