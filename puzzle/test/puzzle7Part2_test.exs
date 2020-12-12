@@ -63,13 +63,13 @@ defmodule Puzzle7Part2Test do
   test "找到bag的孙子，及所有子孙的总和" do
     line = "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags."
 
-    assert Puzzle7Part2.count_san_and_grandson_bags(line, @lines_sample1) == 32
+    assert Puzzle7Part2.count_contained_bags(line, @lines_sample1) == 32
   end
 
   test "更多层级，所有层级子孙的总和, 输入：input_sample.txt" do
     line = "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags."
 
-    assert Puzzle7Part2.count_san_and_grandson_bags(
+    assert Puzzle7Part2.count_contained_bags(
              line,
              "/data/homework/puzzle/lib/puzzle7_input_sample.txt"
            ) == 32
@@ -77,13 +77,13 @@ defmodule Puzzle7Part2Test do
 
   test "更多层级，所有层级子孙的总和" do
     line = "shiny gold bags contain 2 dark red bags."
-    assert Puzzle7Part2.count_san_and_grandson_bags(line, @lines_sample2) == 126
+    assert Puzzle7Part2.count_contained_bags(line, @lines_sample2) == 126
   end
 
   test "更多层级，所有层级子孙的总和, 输入：input_sample2.txt" do
     line = "shiny gold bags contain 2 dark red bags."
 
-    assert Puzzle7Part2.count_san_and_grandson_bags(
+    assert Puzzle7Part2.count_contained_bags(
              line,
              "/data/homework/puzzle/lib/puzzle7_input_sample2.txt"
            ) == 126
@@ -93,7 +93,7 @@ defmodule Puzzle7Part2Test do
   test "更多层级，所有层级子孙的总和, 输入：input.txt" do
     line = "shiny gold bags contain 3 wavy gold bags."
 
-    assert Puzzle7Part2.count_san_and_grandson_bags(
+    assert Puzzle7Part2.count_contained_bags(
              line,
              "/data/homework/puzzle/lib/puzzle7_input.txt"
            ) == 158493

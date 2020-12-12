@@ -28,15 +28,9 @@ defmodule Puzzle7Part2 do
     extract_son_bags(line) |> Enum.reduce(0, fn bag, acc -> acc + bag.count end)
   end
 
-  def count_san_and_grandson_bags(line, [_ | _] = lines) do
+  def count_contained_bags(line, [_ | _] = lines) do
     son_bags_info = extract_son_bags(line)
     son_bags_count = count_son_bags(line)
-
-    # 对于每个儿子，找到儿子的定义行，再对定于行 求儿子的count
-    #    Enum.map(son_bags_info, fn bag_info ->
-    #      find_color_rule_line(bag_info.color, lines)
-    #    end)
-    #    |> Enum.reduce(son_bags_count, fn line, acc -> acc + count_son_bags(line) end)
 
     Enum.reduce(son_bags_info, son_bags_count, fn bag_info, acc ->
       IO.inspect(bag_info, label: "bag_info", pretty: true)
@@ -44,17 +38,17 @@ defmodule Puzzle7Part2 do
       son_count =
         find_color_rule_line(bag_info.color, lines)
         |> IO.inspect(label: "find_color_rule_line", pretty: true)
-        |> count_san_and_grandson_bags(lines)
+        |> count_contained_bags(lines)
 
       acc + son_count * bag_info.count
     end)
   end
 
-  def count_san_and_grandson_bags(line, file_path) do
+  def count_contained_bags(line, file_path) do
     {:ok, file_content} = File.read(file_path)
 
     lines = String.split(file_content, "\n")
-    count_san_and_grandson_bags(line, lines)
+    count_contained_bags(line, lines)
   end
 
   def find_color_rule_line(color, lines) do
