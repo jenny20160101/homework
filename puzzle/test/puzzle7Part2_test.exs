@@ -2,7 +2,6 @@ defmodule Puzzle7Part2Test do
   use ExUnit.Case
   doctest Puzzle7Part2
 
-  @find_color_bag "shiny gold bag"
   @lines_sample1 [
     "light red bags contain 1 bright white bag, 2 muted yellow bags.",
     "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
@@ -89,13 +88,12 @@ defmodule Puzzle7Part2Test do
            ) == 126
   end
 
-
   test "更多层级，所有层级子孙的总和, 输入：input.txt" do
     line = "shiny gold bags contain 3 wavy gold bags."
 
     assert Puzzle7Part2.count_contained_bags(
              line,
              "/data/homework/puzzle/lib/puzzle7_input.txt"
-           ) == 158493
+           ) == 158_493
   end
 end

@@ -1,27 +1,26 @@
 defmodule Puzzle7Part2 do
   def extract_son_bags(line) do
-    [_head | tail] = Regex.split(~r{(contain|,|\.)}, line, trim: true)
+    extract_son_bags_of_format_string(line)
+    #      |> IO.inspect(label: "extract_son_bags1", pretty: true)
+    |> Enum.map(fn bag_info_string ->
+      format_bag_info(bag_info_string)
+    end)
+  end
 
-    bag_list =
-      tail
-      |> IO.inspect(label: "extract_son_bags1", pretty: true)
-      |> Enum.map(fn x ->
-        bag_info =
-          Regex.run(~r/(\d+) (.+bag)/, x)
-          |> IO.inspect(label: "extract_son_bags2", pretty: true)
-
-        if bag_info == nil do
-          ""
-        else
-          %{count: String.to_integer(Enum.at(bag_info, 1)), color: Enum.at(bag_info, 2)}
-        end
-      end)
-
-    if bag_list == [""] do
+  defp extract_son_bags_of_format_string(line) do
+    if String.match?(line, ~r/contain no other bags./) do
       []
     else
-      bag_list
+      [_head | tail] = Regex.split(~r{(contain|,|\.)}, line, trim: true)
+      tail
     end
+  end
+
+  defp format_bag_info(bag_info_string) do
+    bag_info = Regex.run(~r/(\d+) (.+bag)/, bag_info_string)
+    #          |> IO.inspect(label: "extract_son_bags2", pretty: true)
+
+    %{count: String.to_integer(Enum.at(bag_info, 1)), color: Enum.at(bag_info, 2)}
   end
 
   def count_son_bags(line) do
