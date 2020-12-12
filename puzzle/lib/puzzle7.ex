@@ -18,6 +18,11 @@ defmodule Puzzle7 do
     Enum.map(line_list, fn line -> extract_parent_bag_color(line) end)
   end
 
+  def find_ancestor_bags(lines, color) do
+    parent_bags = find_parent_bags(lines, color)
+     Enum.reduce(parent_bags, parent_bags, fn bag_color, acc ->  find_ancestor_bags(lines, bag_color) ++ acc  end)
+  end
+
   def extract_parent_bag_color(line) do
     String.split(line, "contain")
     |> List.first()
@@ -25,18 +30,17 @@ defmodule Puzzle7 do
   end
 
   def ancestor_color_count([_ | _] = lines, color) do
-    color_list = find_parent_bags(lines, color)
-    sum_count = Enum.count(color_list)
-    #    IO.inspect(color_list, Label: "color_list:", pretty: true)
-    #    IO.inspect(sum_count, Label: "sum_count:", pretty: true)
-
-    Enum.reduce(color_list, color_list, fn color, acc ->
-      color_list = find_parent_bags(lines, color)
-      IO.inspect(color_list, Label: "color_list1:", pretty: true)
-      acc ++ color_list
-    end)
-    |> Enum.uniq()
-    |> Enum.count()
+#    parent_color_list = find_parent_bags(lines, color)
+#    acc_init = parent_color_list
+#
+#    Enum.reduce(parent_color_list, acc_init, fn color, acc ->
+#      color_list = find_parent_bags(lines, color)
+#      IO.inspect(color_list, Label: "color_list1:", pretty: true)
+#      acc ++ color_list
+#    end)
+#    |> Enum.uniq()
+#    |> Enum.count()
+    find_ancestor_bags(lines, color) |> Enum.uniq() |> Enum.count()
   end
 
   def ancestor_color_count(file_path, color) do

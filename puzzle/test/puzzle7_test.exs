@@ -63,6 +63,11 @@ defmodule Puzzle67est do
     assert Puzzle7.ancestor_color_count(@lines, @find_color_bag) == 4
   end
 
+  test "获取爷爷bag的数量，输入list" do
+    lines = @lines ++ ["jenny bags contain 1 light red bag."]
+    assert Puzzle7.ancestor_color_count(lines, @find_color_bag) == 5
+  end
+
   test "获取父亲bag的数量，输入txt：input_sample.txt" do
     assert Puzzle7.ancestor_color_count(
              "/data/homework/puzzle/lib/puzzle7_input_sample.txt",
@@ -75,6 +80,6 @@ defmodule Puzzle67est do
              "/data/homework/puzzle/lib/puzzle7_input.txt",
              @find_color_bag
            ) ==
-             18
+             235
   end
 end
