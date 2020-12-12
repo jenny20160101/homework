@@ -9,10 +9,10 @@ defmodule Puzzle7Part1 do
   end
 
   def contain_bag(line, color, [_ | _] = all_lines) do
-#    IO.inspect(line, label: "line", pretty: true)
+    #    IO.inspect(line, label: "line", pretty: true)
 
     if contain_bag_directly(line, color) do
-#      IO.inspect(color, label: "contain_bag_directly", pretty: true)
+      #      IO.inspect(color, label: "contain_bag_directly", pretty: true)
       true
     else
       #       找到 line 包含的所有儿子 ，check儿子是否包含color
@@ -26,7 +26,7 @@ defmodule Puzzle7Part1 do
 
   def count_contain_bag([_ | _] = lines, color) do
     Enum.filter(lines, fn x_line -> contain_bag(x_line, color, lines) end)
-#    |> IO.inspect(label: "count_contain_bag", pretty: true)
+    #    |> IO.inspect(label: "count_contain_bag", pretty: true)
     |> Enum.count()
   end
 
@@ -42,11 +42,10 @@ defmodule Puzzle7Part1 do
 
     color_list =
       tail
-#      |> IO.inspect(label: "extract_contained_colors1", pretty: true)
+      #      |> IO.inspect(label: "extract_contained_colors1", pretty: true)
       |> Enum.map(fn x ->
-        color =
-          Regex.run(~r/\d+ (.+bag)/, x)
-#          |> IO.inspect(label: "extract_contained_colors2", pretty: true)
+        color = Regex.run(~r/\d+ (.+bag)/, x)
+        #          |> IO.inspect(label: "extract_contained_colors2", pretty: true)
 
         if color == nil do
           ""
