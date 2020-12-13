@@ -62,39 +62,39 @@ defmodule Puzzle3Test do
   test "right three 不会超过右边边界" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_three(1, 1) == %{line: 1, column: 4}
+    assert Puzzle3.go_right(1, 1, 3) == %{line: 1, column: 4}
 
-    assert Puzzle3.right_three(1, 2) ==
+    assert Puzzle3.go_right(1, 2, 3) ==
              %{
                line: 1,
                column: 5
              }
 
-    assert Puzzle3.right_three(2, 2) == %{line: 2, column: 5}
+    assert Puzzle3.go_right(2, 2, 3) == %{line: 2, column: 5}
   end
 
   test "right three 会超过右边边界" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_three(1, @line_length - 3) ==
+    assert Puzzle3.go_right(1, @line_length - 3, 3) ==
              %{
                line: 1,
                column: @line_length
              }
 
-    assert Puzzle3.right_three(1, @line_length - 2) ==
+    assert Puzzle3.go_right(1, @line_length - 2, 3) ==
              %{
                line: 1,
                column: 1
              }
 
-    assert Puzzle3.right_three(1, @line_length - 1) ==
+    assert Puzzle3.go_right(1, @line_length - 1, 3) ==
              %{
                line: 1,
                column: 2
              }
 
-    assert Puzzle3.right_three(1, @line_length) ==
+    assert Puzzle3.go_right(1, @line_length, 3) ==
              %{
                line: 1,
                column: 3
@@ -103,39 +103,39 @@ defmodule Puzzle3Test do
 
   test "down 1" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
-    assert Puzzle3.down_one(1, 3, @line_count) == %{line: 2, column: 3}
-    assert Puzzle3.down_one(2, 7, @line_count) == %{line: 3, column: 7}
+    assert Puzzle3.go_down(1, 3, @line_count, 1) == %{line: 2, column: 3}
+    assert Puzzle3.go_down(2, 7, @line_count, 1) == %{line: 3, column: 7}
   end
 
   test "down 1 最后一行，不能向下走了" do
-    assert Puzzle3.down_one(@line_count, 1, @line_count) == :finished
-    assert Puzzle3.down_one(@line_count, 4, @line_count) == :finished
+    assert Puzzle3.go_down(@line_count, 1, @line_count, 1) == :finished
+    assert Puzzle3.go_down(@line_count, 4, @line_count, 1) == :finished
   end
 
   test "right 3 down 1" do
     #    map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_3_and_down_1(1, 1) ==
+    assert Puzzle3.go_right_and_down(1, 1, 3, 1) ==
              %{line: 2, column: 4}
 
-    assert Puzzle3.right_3_and_down_1(10, 1) ==
+    assert Puzzle3.go_right_and_down(10, 1, 3, 1) ==
              %{line: 11, column: 4}
   end
 
   test "right 3：超过右边界，则地图向右复制一倍。可以使用 取模，重新回到第一列" do
     #      map_list = Puzzle3.convert_input_file_to_list(@input_sample)
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length - 2) == %{
+    assert Puzzle3.go_right_and_down(1, @line_length - 2, 3, 1) == %{
              line: 2,
              column: 1
            }
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length - 1) == %{
+    assert Puzzle3.go_right_and_down(1, @line_length - 1, 3, 1) == %{
              line: 2,
              column: 2
            }
 
-    assert Puzzle3.right_3_and_down_1(1, @line_length) == %{
+    assert Puzzle3.go_right_and_down(1, @line_length, 3, 1) == %{
              line: 2,
              column: 3
            }

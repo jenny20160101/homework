@@ -17,7 +17,7 @@ defmodule Puzzle3 do
   def get_trace(trace, map_list) do
     %{line: line, column: column} = List.last(trace)
 
-    result = right_3_and_down_1(line, column)
+    result = go_right_and_down(line, column, 3, 1)
     #    IO.inspect(result, label: "result1", pretty: true)
 
     if result == :finished do
@@ -36,8 +36,8 @@ defmodule Puzzle3 do
     Enum.at(map_list, line - 1)
   end
 
-  def right_three(line, column) do
-    new_column = (column + 3) |> adjust_column_when_exceed(@line_length)
+  def go_right(line, column, right_steps) do
+    new_column = (column + right_steps) |> adjust_column_when_exceed(@line_length)
     %{line: line, column: new_column}
   end
 
@@ -49,12 +49,12 @@ defmodule Puzzle3 do
     Integer.mod(column, @line_length)
   end
 
-  def down_one(line, _column, @line_count) when line == @line_count do
+  def go_down(line, _column, @line_count, down_steps) when line == @line_count do
     :finished
   end
 
-  def down_one(line, column, _) do
-    new_line = line + 1
+  def go_down(line, column, _line_count, down_steps) do
+    new_line = line + down_steps
     %{line: new_line, column: column}
   end
 
@@ -82,12 +82,12 @@ defmodule Puzzle3 do
     String.slice(line_content, column - 1, 1) == "#"
   end
 
-  def right_3_and_down_1(line, column) do
-    new_position = right_three(line, column)
+  def go_right_and_down(line, column, right_steps, down_steps) do
+    new_position = go_right(line, column, right_steps)
 
     %{line: line, column: column} = new_position
-    # IO.inspect(result, label: "right_3_and_down_1  result", pretty: true)
-    down_one(line, column, @line_count)
+    # IO.inspect(result, label: "go_right_and_down  result", pretty: true)
+    go_down(line, column, @line_count, down_steps)
   end
 
   def tree_count_in_trace(map_list) do
