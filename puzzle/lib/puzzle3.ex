@@ -2,8 +2,10 @@ defmodule Puzzle3 do
   @moduledoc """
   Documentation for `Puzzle`.
   """
-  @line_length 31
-  @line_count 323
+
+  def count_tree([_|_] = lines, right_steps, down_steps) do
+    tree_count_in_trace(lines, right_steps, down_steps)
+  end
 
   def count_tree(file_path, right_steps, down_steps) do
     {:ok, file_content} = File.read(file_path)
@@ -17,7 +19,7 @@ defmodule Puzzle3 do
   def get_trace(trace, map_list, right_steps, down_steps) do
     %{line: line, column: column} = List.last(trace)
 
-    result = go_right_and_down(line, column, right_steps, down_steps)
+    result = go_right_and_down(line, column, right_steps, down_steps, Enum.count(map_list), String.length(Enum.at(map_list, 0)))
     #    IO.inspect(result, label: "result1", pretty: true)
 
     if result == :finished do
@@ -36,20 +38,20 @@ defmodule Puzzle3 do
     Enum.at(map_list, line - 1)
   end
 
-  def go_right(line, column, right_steps) do
-    new_column = (column + right_steps) |> adjust_column_when_exceed(@line_length)
+  def go_right(line, column, right_steps, column_count) do
+    new_column = (column + right_steps) |> adjust_column_when_exceed(column_count)
     %{line: line, column: new_column}
   end
 
-  def adjust_column_when_exceed(column, @line_length) when column <= @line_length do
+  def adjust_column_when_exceed(column, line_length) when column <= line_length do
     column
   end
 
-  def adjust_column_when_exceed(column, @line_length) when column > @line_length do
-    Integer.mod(column, @line_length)
+  def adjust_column_when_exceed(column, line_length) when column > line_length do
+    Integer.mod(column, line_length)
   end
 
-  def go_down(line, _column, @line_count, down_steps) when line == @line_count do
+  def go_down(line, _column, line_count, down_steps) when line == line_count do
     :finished
   end
 
@@ -82,12 +84,12 @@ defmodule Puzzle3 do
     String.slice(line_content, column - 1, 1) == "#"
   end
 
-  def go_right_and_down(line, column, right_steps, down_steps) do
-    new_position = go_right(line, column, right_steps)
+  def go_right_and_down(line, column, right_steps, down_steps, line_count, column_count) do
+    new_position = go_right(line, column, right_steps, column_count)
 
     %{line: line, column: column} = new_position
     # IO.inspect(result, label: "go_right_and_down  result", pretty: true)
-    go_down(line, column, @line_count, down_steps)
+    go_down(line, column, line_count, down_steps)
   end
 
   def tree_count_in_trace(map_list, right_steps, down_steps) do
