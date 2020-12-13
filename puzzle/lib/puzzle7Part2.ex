@@ -42,9 +42,7 @@ defmodule Puzzle7Part2 do
   end
 
   def count_contained_bags(line, file_path) do
-    {:ok, file_content} = File.read(file_path)
-
-    lines = String.split(file_content, "\n")
+    lines = FileTool.convert_file_to_list(file_path)
     count_contained_bags(line, lines)
   end
 

@@ -1,4 +1,4 @@
-#defmodule Puzzle7Part1 do
+# defmodule Puzzle7Part1 do
 #  @moduledoc """
 #  Documentation for `Puzzle`.
 #  """
@@ -70,4 +70,4 @@
 #    end)
 #    |> List.first()
 #  end
-#end
+# end

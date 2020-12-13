@@ -9,7 +9,7 @@ defmodule Puzzle7 do
   end
 
   def find_parent_bags(lines, color) do
-#    IO.inspect("color", Label: "color", pretty: true)
+    #    IO.inspect("color", Label: "color", pretty: true)
     Enum.filter(lines, fn line -> contain_bag_directly(line, color) end)
     |> IO.inspect(Label: "find_parent_bags---lines_list:", pretty: true)
     |> Enum.map(fn line -> extract_parent_bag_color(line) end)
