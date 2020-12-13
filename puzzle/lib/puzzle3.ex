@@ -5,26 +5,26 @@ defmodule Puzzle3 do
   @line_length 31
   @line_count 323
 
-  def count_tree(file_path) do
+  def count_tree(file_path, right_steps, down_steps) do
     {:ok, file_content} = File.read(file_path)
     #    #IO.inspect(file_content, Label: "file_content:", pretty: true)
 
     # 字符串转换为 list
     map_list = convert_input_file_to_list(file_content)
-    tree_count_in_trace(map_list)
+    tree_count_in_trace(map_list, right_steps, down_steps)
   end
 
-  def get_trace(trace, map_list) do
+  def get_trace(trace, map_list, right_steps, down_steps) do
     %{line: line, column: column} = List.last(trace)
 
-    result = go_right_and_down(line, column, 3, 1)
+    result = go_right_and_down(line, column, right_steps, down_steps)
     #    IO.inspect(result, label: "result1", pretty: true)
 
     if result == :finished do
       trace
     else
       trace = trace ++ [result]
-      get_trace(trace, map_list)
+      get_trace(trace, map_list, right_steps, down_steps)
     end
   end
 
@@ -90,8 +90,8 @@ defmodule Puzzle3 do
     go_down(line, column, @line_count, down_steps)
   end
 
-  def tree_count_in_trace(map_list) do
-    trace = get_trace([%{line: 1, column: 1}], map_list)
+  def tree_count_in_trace(map_list, right_steps, down_steps) do
+    trace = get_trace([%{line: 1, column: 1}], map_list, right_steps, down_steps)
     IO.inspect(trace, label: "trace", pretty: true)
 
     Enum.filter(trace, fn %{line: line, column: column} = _ ->
