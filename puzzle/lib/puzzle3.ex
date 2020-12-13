@@ -101,4 +101,8 @@ defmodule Puzzle3 do
     end)
     |> Enum.count()
   end
+
+  def sum_trees_of_all_trace(file_path, rules) do
+    Enum.reduce(rules, 1, fn rule, acc -> acc * count_tree(file_path, rule.right_steps, rule.down_steps)  end)
+  end
 end

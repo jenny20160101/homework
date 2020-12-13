@@ -174,6 +174,15 @@ defmodule Puzzle3Test do
 
   test "sum 各种方式的tree求和" do
     input_sample_list = String.split(@input_sample, "\n")
+    rules = [
+      %{right_steps: 3, down_steps: 1},
+      %{right_steps: 1, down_steps: 1},
+      %{right_steps: 5, down_steps: 1},
+      %{right_steps: 7, down_steps: 1},
+      %{right_steps: 1, down_steps: 2},
+    ]
+    assert Puzzle3.sum_trees_of_all_trace("/data/homework/puzzle/lib/puzzle3_input_sample.txt", rules ) == 336
+    assert Puzzle3.sum_trees_of_all_trace("/data/homework/puzzle/lib/puzzle3_input.txt", rules ) == 2421944712
 
   end
 
