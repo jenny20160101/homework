@@ -49,9 +49,9 @@ defmodule Puzzle2_part2Test do
 
     # 2个匹配
     assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-3 b: lbbbbntqswsv")) ==
-             true
+             false
 
-    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-9 c: ccccccccc")) == true
+    assert Puzzle2_part2.check_pwd(Puzzle2_part2.convert_line_content("2-9 c: ccccccccc")) == false
 
 
   end
@@ -71,7 +71,7 @@ defmodule Puzzle2_part2Test do
       Puzzle2_part2.convert_line_content("2-9 c: ccccccccc")
     ]
 
-    assert Puzzle2_part2.valid_pwd_count(list) == 6
+    assert Puzzle2_part2.valid_pwd_count(list) == 4
   end
 
   test "check input file" do

@@ -46,8 +46,8 @@ defmodule Puzzle2_part2 do
       } = line) do
 #    IO.inspect(line, label: "line", pretty: true)
 
-    (String.slice(pwd, position1 - 1, 1) == find_char ||
-      String.slice(pwd, position2 - 1, 1) == find_char)
+    (String.slice(pwd, position1 - 1, 1) == find_char &&  String.slice(pwd, position2 - 1, 1) != find_char) ||
+      (String.slice(pwd, position1 - 1, 1) != find_char && String.slice(pwd, position2 - 1, 1) == find_char)
 #    |> IO.inspect(label: "check_pwd result", pretty: true)
   end
 
