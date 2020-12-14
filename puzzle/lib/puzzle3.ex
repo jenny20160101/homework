@@ -3,7 +3,7 @@ defmodule Puzzle3 do
   Documentation for `Puzzle`.
   """
 
-  def count_tree([_|_] = lines, right_steps, down_steps) do
+  def count_tree([_ | _] = lines, right_steps, down_steps) do
     tree_count_in_trace(lines, right_steps, down_steps)
   end
 
@@ -19,7 +19,16 @@ defmodule Puzzle3 do
   def get_trace(trace, map_list, right_steps, down_steps) do
     %{line: line, column: column} = List.last(trace)
 
-    result = go_right_and_down(line, column, right_steps, down_steps, Enum.count(map_list), String.length(Enum.at(map_list, 0)))
+    result =
+      go_right_and_down(
+        line,
+        column,
+        right_steps,
+        down_steps,
+        Enum.count(map_list),
+        String.length(Enum.at(map_list, 0))
+      )
+
     #    IO.inspect(result, label: "result1", pretty: true)
 
     if result == :finished do
@@ -103,6 +112,8 @@ defmodule Puzzle3 do
   end
 
   def sum_trees_of_all_trace(file_path, rules) do
-    Enum.reduce(rules, 1, fn rule, acc -> acc * count_tree(file_path, rule.right_steps, rule.down_steps)  end)
+    Enum.reduce(rules, 1, fn rule, acc ->
+      acc * count_tree(file_path, rule.right_steps, rule.down_steps)
+    end)
   end
 end
