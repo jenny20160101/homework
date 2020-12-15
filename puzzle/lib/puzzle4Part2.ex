@@ -2,18 +2,19 @@ defmodule Puzzle4Part2 do
   @moduledoc """
   Documentation for `Puzzle`.
   """
-  def format_passport_string (passport_string) do
-
+  def format_passport_string(passport_string) do
     property_list = String.split(passport_string)
 
-
-
+    Enum.map(property_list, fn x ->
+      each_property_list = String.split(x, ":")
+      %{key: List.first(each_property_list), value: List.last(each_property_list)}
+    end)
+    |> IO.inspect()
   end
 
   def is_valid_passport(passport_string) do
-    property_list = String.split(passport_string)
+    property_list = format_passport_string(passport_string)
     property_count = Enum.count(property_list)
-
 
     case property_count do
       8 -> true
@@ -23,7 +24,11 @@ defmodule Puzzle4Part2 do
   end
 
   def lack_cid(property_list) do
-    !Enum.any?(property_list, fn x -> String.match?(x, ~r/cid/) end)
+    !Enum.any?(property_list, fn x ->
+      IO.inspect(x, label: "x")
+      IO.inspect(x.key, label: "x[key]")
+      x.key == "cid"
+    end)
   end
 
   def count_valid_passport(file_path) do
