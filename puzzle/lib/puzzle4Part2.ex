@@ -5,30 +5,51 @@ defmodule Puzzle4Part2 do
   def format_passport_string(passport_string) do
     property_list = String.split(passport_string)
 
-    Enum.map(property_list, fn x ->
+    Enum.reduce(property_list, %{}, fn x, acc ->
       each_property_list = String.split(x, ":")
-      %{key: List.first(each_property_list), value: List.last(each_property_list)}
+      Map.put(acc, List.first(each_property_list), List.last(each_property_list))
     end)
-    |> IO.inspect()
+    |> IO.inspect(lable: "format_passport_string result")
   end
 
   def is_valid_passport(passport_string) do
     property_list = format_passport_string(passport_string)
     property_count = Enum.count(property_list)
 
+    valid_height(Map.get(property_list, "hgt")) |> IO.inspect()
+    valid_Birth_Year(Map.get(property_list, "byr")) |> IO.inspect()
+    valid_expiration_year(Map.get(property_list, "eyr")) |> IO.inspect()
+    valid_eye_color(Map.get(property_list, "ecl")) |> IO.inspect()
+    valid_hair_color(Map.get(property_list, "hcl")) |> IO.inspect()
+    valid_issue_year(Map.get(property_list, "iyr")) |> IO.inspect()
+    valid_passport_id(Map.get(property_list, "pid")) |> IO.inspect()
+
     case property_count do
-      8 -> true
-      7 -> lack_cid(property_list)
-      _ -> false
+      8 ->
+        IO.inspect("8个")
+        valid_property_except_cid(property_list)
+
+      7 ->
+        IO.inspect("7个 lack_cid")
+        lack_cid(property_list) && valid_property_except_cid(property_list)
+
+      _ ->
+        false
     end
   end
 
+  def valid_property_except_cid(property_list) do
+    valid_height(Map.get(property_list, "hgt")) &&
+      valid_Birth_Year(Map.get(property_list, "byr")) &&
+      valid_expiration_year(Map.get(property_list, "eyr")) &&
+      valid_eye_color(Map.get(property_list, "ecl")) &&
+      valid_hair_color(Map.get(property_list, "hcl")) &&
+      valid_issue_year(Map.get(property_list, "iyr")) &&
+      valid_passport_id(Map.get(property_list, "pid"))
+  end
+
   def lack_cid(property_list) do
-    !Enum.any?(property_list, fn x ->
-      IO.inspect(x, label: "x")
-      IO.inspect(x.key, label: "x[key]")
-      x.key == "cid"
-    end)
+    Map.get(property_list, "cid") == nil
   end
 
   def count_valid_passport(file_path) do
@@ -39,12 +60,28 @@ defmodule Puzzle4Part2 do
     Enum.filter(passport_list, fn x -> is_valid_passport(x) end) |> Enum.count()
   end
 
+  def valid_Birth_Year(year) when is_binary(year) do
+    year = String.to_integer(year)
+    valid_Birth_Year(year)
+  end
+
   def valid_Birth_Year(year) do
+    #    IO.inspect(year)
     year >= 1920 and year <= 2002
+  end
+
+  def valid_issue_year(year) when is_binary(year) do
+    year = String.to_integer(year)
+    valid_issue_year(year)
   end
 
   def valid_issue_year(year) do
     year >= 2010 and year <= 2020
+  end
+
+  def valid_expiration_year(year) when is_binary(year) do
+    year = String.to_integer(year)
+    valid_expiration_year(year)
   end
 
   def valid_expiration_year(year) do
@@ -52,7 +89,9 @@ defmodule Puzzle4Part2 do
   end
 
   def valid_height(height_string) do
+    IO.inspect(height_string)
     height_info = Regex.run(~r/(\d+)(cm|in)/, height_string)
+    IO.inspect(height_info)
 
     if height_info == nil do
       false
@@ -73,7 +112,8 @@ defmodule Puzzle4Part2 do
   end
 
   def valid_hair_color(color) do
-    String.match?(color, ~r/^#[1-3]{3}[a-c]{3}$/)
+        IO.inspect(color)
+    String.match?(color, ~r/^#[0-9a-f]{6}$/)
   end
 
   def valid_eye_color(color) do
@@ -81,6 +121,7 @@ defmodule Puzzle4Part2 do
   end
 
   def valid_passport_id(id) do
-    String.match?(id, ~r/^0[0-9]{8}$/)
+    IO.inspect(id)
+    String.match?(id, ~r/^[0-9]{9}$/)
   end
 end
