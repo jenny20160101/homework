@@ -28,13 +28,20 @@ defmodule Puzzle4Part2 do
   end
 
   def valid_property_except_cid(properties) do
-    valid_height(Map.get(properties, "hgt")) &&
-      valid_Birth_Year(Map.get(properties, "byr")) &&
-      valid_expiration_year(Map.get(properties, "eyr")) &&
-      valid_eye_color(Map.get(properties, "ecl")) &&
-      valid_hair_color(Map.get(properties, "hcl")) &&
-      valid_issue_year(Map.get(properties, "iyr")) &&
-      valid_passport_id(Map.get(properties, "pid"))
+    Enum.all?(properties, fn {key, value} = _x -> valid_property(key, value) end)
+  end
+
+  def valid_property(key, value) do
+    case key do
+      "cid" -> true
+      "hgt" -> valid_height(value)
+      "byr" -> valid_Birth_Year(value)
+      "eyr" -> valid_expiration_year(value)
+      "ecl" -> valid_eye_color(value)
+      "hcl" -> valid_hair_color(value)
+      "iyr" -> valid_issue_year(value)
+      "pid" -> valid_passport_id(value)
+    end
   end
 
   def lack_cid(properties) do
