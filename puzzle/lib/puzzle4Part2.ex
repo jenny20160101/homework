@@ -16,13 +16,13 @@ defmodule Puzzle4Part2 do
     property_list = format_passport_string(passport_string)
     property_count = Enum.count(property_list)
 
-    valid_height(Map.get(property_list, "hgt")) |> IO.inspect()
-    valid_Birth_Year(Map.get(property_list, "byr")) |> IO.inspect()
-    valid_expiration_year(Map.get(property_list, "eyr")) |> IO.inspect()
-    valid_eye_color(Map.get(property_list, "ecl")) |> IO.inspect()
-    valid_hair_color(Map.get(property_list, "hcl")) |> IO.inspect()
-    valid_issue_year(Map.get(property_list, "iyr")) |> IO.inspect()
-    valid_passport_id(Map.get(property_list, "pid")) |> IO.inspect()
+#    valid_height(Map.get(property_list, "hgt")) |> IO.inspect()
+#    valid_Birth_Year(Map.get(property_list, "byr")) |> IO.inspect()
+#    valid_expiration_year(Map.get(property_list, "eyr")) |> IO.inspect()
+#    valid_eye_color(Map.get(property_list, "ecl")) |> IO.inspect()
+#    valid_hair_color(Map.get(property_list, "hcl")) |> IO.inspect()
+#    valid_issue_year(Map.get(property_list, "iyr")) |> IO.inspect()
+#    valid_passport_id(Map.get(property_list, "pid")) |> IO.inspect()
 
     case property_count do
       8 ->
@@ -49,6 +49,8 @@ defmodule Puzzle4Part2 do
   end
 
   def lack_cid(property_list) do
+    IO.inspect("cid:")
+    IO.inspect(Map.get(property_list, "cid"))
     Map.get(property_list, "cid") == nil
   end
 

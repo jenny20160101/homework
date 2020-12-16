@@ -31,8 +31,8 @@ ecl:grn pid:012533040 byr:1946") == false
   test "缺少的属性，除了cid还有其他的，则 invalid" do
     assert Puzzle4Part2.is_valid_passport("iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
 hcl:#cfa07d byr:1929") == false
-#    assert Puzzle4Part2.is_valid_passport("hcl:#cfa07d eyr:2025 pid:166559648
-#iyr:2011 ecl:brn hgt:59in") == false
+    assert Puzzle4Part2.is_valid_passport("hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in") == false
   end
 
   test "整个文档中 valid passport数量-sample" do
@@ -41,7 +41,8 @@ hcl:#cfa07d byr:1929") == false
   end
 
   test "整个文档中 valid passport数量" do
-    assert Puzzle4Part2.count_valid_passport("/data/homework/puzzle/lib/puzzle4_input.txt") == 182
+    assert Puzzle4Part2.count_valid_passport("/data/homework/puzzle/lib/puzzle4_input_sample2.txt") == 4
+    assert Puzzle4Part2.count_valid_passport("/data/homework/puzzle/lib/puzzle4_input.txt") == 109
   end
 
   test "valid_Birth_Year" do
@@ -113,6 +114,6 @@ hcl:#cfa07d byr:1929") == false
     assert Puzzle4Part2.valid_passport_id("000000001") == true
     assert Puzzle4Part2.valid_passport_id("012345678") == true
     assert Puzzle4Part2.valid_passport_id("0123456789") == false
-    assert Puzzle4Part2.valid_passport_id("212345678") == false
+    assert Puzzle4Part2.valid_passport_id("212345678") == true
   end
 end
