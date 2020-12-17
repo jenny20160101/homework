@@ -3,20 +3,20 @@ defmodule Puzzle6Part2 do
   Documentation for `Puzzle`.
   """
 
-  def count_questions_in_group(group) do
-    extract_questions_which_everyone_answer_yes(group) |> Enum.count()
+  def count_questions_which_everyone_answer_yes(group) do
+    questions_which_everyone_answer_yes(group) |> Enum.count()
   end
 
-  def extract_questions_which_everyone_answer_yes(group) do
-    all_questions_of_group = all_questions_of_group(group)
+  def questions_which_everyone_answer_yes(group) do
+    all_questions_in_group = all_questions_in_group(group)
     all_person_answers = String.split(group, "\n")
 
-    Enum.filter(all_questions_of_group, fn question ->
+    Enum.filter(all_questions_in_group, fn question ->
       Enum.all?(all_person_answers, &answer_yes(&1, question))
     end)
   end
 
-  def all_questions_of_group(group) do
+  def all_questions_in_group(group) do
     String.replace(group, "\n", "")
     |> String.split("", trim: true)
     |> Enum.uniq()
@@ -28,7 +28,7 @@ defmodule Puzzle6Part2 do
 
   def questions_in_groups(groups) do
     String.split(groups, "\n\n")
-    |> Enum.reduce(0, fn group, acc -> count_questions_in_group(group) + acc end)
+    |> Enum.reduce(0, fn group, acc -> count_questions_which_everyone_answer_yes(group) + acc end)
   end
 
   def questions_in_file(file_path) do

@@ -3,45 +3,45 @@ defmodule Puzzle6Part2Test do
   doctest Puzzle6Part2
 
   test "获取1group中的 所有question" do
-    assert Puzzle6Part2.all_questions_of_group("abc") == ["a", "b", "c"]
-    assert Puzzle6Part2.all_questions_of_group("a
+    assert Puzzle6Part2.all_questions_in_group("abc") == ["a", "b", "c"]
+    assert Puzzle6Part2.all_questions_in_group("a
 b
 c") == ["a", "b", "c"]
-    assert Puzzle6Part2.all_questions_of_group("ab
+    assert Puzzle6Part2.all_questions_in_group("ab
 ac") == ["a", "b", "c"]
-    assert Puzzle6Part2.all_questions_of_group("a
+    assert Puzzle6Part2.all_questions_in_group("a
 a
 a
 a") == ["a"]
-    assert Puzzle6Part2.all_questions_of_group("b") == ["b"]
+    assert Puzzle6Part2.all_questions_in_group("b") == ["b"]
   end
 
   test "获取1group中的 所有人都say yes的questions" do
-    assert Puzzle6Part2.extract_questions_which_everyone_answer_yes("abc") == ["a", "b", "c"]
-    assert Puzzle6Part2.extract_questions_which_everyone_answer_yes("a
+    assert Puzzle6Part2.questions_which_everyone_answer_yes("abc") == ["a", "b", "c"]
+    assert Puzzle6Part2.questions_which_everyone_answer_yes("a
 b
 c") == []
-    assert Puzzle6Part2.extract_questions_which_everyone_answer_yes("ab
+    assert Puzzle6Part2.questions_which_everyone_answer_yes("ab
 ac") == ["a"]
-    assert Puzzle6Part2.extract_questions_which_everyone_answer_yes("a
+    assert Puzzle6Part2.questions_which_everyone_answer_yes("a
 a
 a
 a") == ["a"]
-    assert Puzzle6Part2.extract_questions_which_everyone_answer_yes("b") == ["b"]
+    assert Puzzle6Part2.questions_which_everyone_answer_yes("b") == ["b"]
   end
 
   test "获取1group中的 所有人都say yes的questions的数量" do
-    assert Puzzle6Part2.count_questions_in_group("abc") == 3
-    assert Puzzle6Part2.count_questions_in_group("a
+    assert Puzzle6Part2.count_questions_which_everyone_answer_yes("abc") == 3
+    assert Puzzle6Part2.count_questions_which_everyone_answer_yes("a
 b
 c") == 0
-    assert Puzzle6Part2.count_questions_in_group("ab
+    assert Puzzle6Part2.count_questions_which_everyone_answer_yes("ab
 ac") == 1
-    assert Puzzle6Part2.count_questions_in_group("a
+    assert Puzzle6Part2.count_questions_which_everyone_answer_yes("a
 a
 a
 a") == 1
-    assert Puzzle6Part2.count_questions_in_group("b") == 1
+    assert Puzzle6Part2.count_questions_which_everyone_answer_yes("b") == 1
   end
 
   test "获取所有group中的 question 数量和" do
@@ -67,6 +67,6 @@ b") == 6
   end
 
   test "获取所有group中的 question 数量和 : 从文件读入input" do
-    assert Puzzle6Part2.questions_in_file("/data/homework/puzzle/lib/puzzle6_input.txt") == 6596
+    assert Puzzle6Part2.questions_in_file("/data/homework/puzzle/lib/puzzle6_input.txt") == 3219
   end
 end
