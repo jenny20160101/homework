@@ -63,7 +63,8 @@ b") == 6
   end
 
   test "获取所有group中的 question 数量和 : 从文件读入input:sample" do
-    assert Puzzle6Part2.questions_in_file("/data/homework/puzzle/lib/puzzle6_input_sample.txt") == 6
+    assert Puzzle6Part2.questions_in_file("/data/homework/puzzle/lib/puzzle6_input_sample.txt") ==
+             6
   end
 
   test "获取所有group中的 question 数量和 : 从文件读入input" do
