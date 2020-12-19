@@ -24,11 +24,41 @@ defmodule Puzzle8 do
     }
   end
 
-  def run_instruction(accumulator, line_index, %{operation: operation, argument: argument}) do
-    %{
+  def extract_instruction(line_content_string) do
+    line_content = String.split(line_content_string)
+    %{operation: List.first(line_content), argument: String.to_integer(List.last(line_content))}
+  end
+
+  def extract_instruction(line_content_string, line_index) do
+    line_content = String.split(line_content_string)
+
+    %{operation: List.first(line_content), argument: String.to_integer(List.last(line_content))}
+    |> Map.put(:line_index, line_index)
+  end
+
+  def run_instruction(file_path) do
+    lines = FileTool.convert_file_to_list(file_path)
+    run_instruction(0, [], 0, lines)
+  end
+
+  def run_instruction(accumulator, trace, line_index, lines) do
+    IO.inspect(lines)
+    IO.inspect(line_index)
+
+    %{line_index: line_index, operation: operation, argument: argument} =
+      extract_instruction(Enum.at(lines, line_index), line_index)
+
+    run_result = %{
       accumulator: change_accumulator(operation, argument, accumulator),
-      line_index: change_line_index(operation, argument, line_index)
+      line_index: change_line_index(operation, argument, line_index),
+      trace: trace ++ [line_index]
     }
+
+    if Enum.any?(trace, fn x -> x == run_result.line_index end) do
+      {:infinite_loop, run_result}
+    else
+      run_instruction(run_result.accumulator, run_result.trace, run_result.line_index, lines)
+    end
   end
 
   def change_accumulator(operation, argument, accumulator) do
