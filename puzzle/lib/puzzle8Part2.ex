@@ -30,6 +30,14 @@ defmodule Puzzle8Part2 do
     end
   end
 
+  def find_corrupted_line_and_fix_async(lines) do
+    Enum.with_index(lines)
+    |> Task.async_stream(&change_operation_and_run_all_instruction(&1, lines))
+    |> Enum.map(fn {:ok, run_result} -> run_result end)
+    |> Enum.filter(fn run_result -> Tuple.to_list(run_result) |> Enum.at(0) == :ok end)
+    |> List.first()
+  end
+
   def change_operation_and_run_all_instruction(
         {line_content_string, line_index} = _line_content_string_with_index,
         lines

@@ -16,7 +16,7 @@ defmodule Puzzle8Test do
 
   test "迭代直到 某一行重复执行, 输入字符串" do
     lines = @lines
-    result = Puzzle8.run_all_instruction(0, [], 0, lines)
+    result = Puzzle8Part2.run_all_instruction(0, [], 0, lines)
 
     assert {:infinite_loop,
             %{
@@ -26,13 +26,13 @@ defmodule Puzzle8Test do
   end
 
   test "解析每一行" do
-    assert Puzzle8.extract_instruction(@lines, 0) == %{
+    assert Puzzle8Part2.extract_instruction(@lines, 0) == %{
              operation: "nop",
              argument: 0,
              line_index: 0
            }
 
-    assert Puzzle8.extract_instruction(@lines, 1) == %{
+    assert Puzzle8Part2.extract_instruction(@lines, 1) == %{
              operation: "acc",
              argument: 1,
              line_index: 1
@@ -44,7 +44,7 @@ defmodule Puzzle8Test do
     line_index1 = 0
     trace = []
 
-    assert Puzzle8.run_one_instruction(
+    assert Puzzle8Part2.run_one_instruction(
              %{
                line_index: line_index1,
                operation: "nop",
@@ -63,7 +63,7 @@ defmodule Puzzle8Test do
     accumulator = 0
     line_index = 1
 
-    assert Puzzle8.run_one_instruction(
+    assert Puzzle8Part2.run_one_instruction(
              %{
                line_index: line_index,
                operation: "acc",
@@ -82,7 +82,7 @@ defmodule Puzzle8Test do
 
     line_index = 2
 
-    assert Puzzle8.run_one_instruction(
+    assert Puzzle8Part2.run_one_instruction(
              %{
                line_index: line_index,
                operation: "jmp",
@@ -100,7 +100,7 @@ defmodule Puzzle8Test do
     accumulator = 1
     line_index = 6
 
-    assert Puzzle8.run_one_instruction(
+    assert Puzzle8Part2.run_one_instruction(
              %{
                line_index: line_index,
                operation: "acc",
@@ -145,5 +145,11 @@ defmodule Puzzle8Test do
   test "修改动作后，能结束  输入：input" do
     line = Puzzle8Part2.find_corrupted_line_and_fix("/data/homework/puzzle/lib/puzzle8_input.txt")
     assert line == %{accumulator: 1205, line_content_string: "jmp -73", line_index: 156}
+  end
+
+  test "多进程进行计算" do
+    assert Puzzle8Part2.find_corrupted_line_and_fix_async(@lines) == {:ok, [accumulator: 8]}
+    lines = FileTool.convert_file_to_list("/data/homework/puzzle/lib/puzzle8_input.txt")
+    assert Puzzle8Part2.find_corrupted_line_and_fix_async(lines) == {:ok, [accumulator: 1205]}
   end
 end
