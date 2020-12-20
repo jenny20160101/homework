@@ -3,16 +3,8 @@ defmodule Puzzle8Part2 do
   Documentation for `Puzzle`.
   """
 
-  def run_all_instruction(file_path) do
-    lines = FileTool.convert_file_to_list(file_path)
-    run_all_instruction(0, [], 0, lines)
-  end
-
   def run_all_instruction(accumulator, trace, line_index, lines) do
-    IO.inspect("开始run_all_instruction")
-    IO.inspect(line_index, label: "2:line_index", pretty: true)
     run_result = extract_instruction(lines, line_index) |> run_one_instruction(accumulator, trace)
-    IO.inspect(run_result, label: "3:run_result", pretty: true)
 
     if run_result.line_index >= Enum.count(lines) do
       {:ok, accumulator: run_result.accumulator}
@@ -20,9 +12,6 @@ defmodule Puzzle8Part2 do
       if Enum.any?(trace, fn x -> x == run_result.line_index end) do
         {:infinite_loop, run_result}
       else
-
-        IO.inspect("4.开始下一个run_all_instruction")
-
         run_all_instruction(
           run_result.accumulator,
           run_result.trace,
@@ -33,44 +22,44 @@ defmodule Puzzle8Part2 do
     end
   end
 
-  def find_change_which_line(file_path) when is_binary(file_path) do
-    lines = FileTool.convert_file_to_list(file_path)
-    find_change_which_line(lines)
+  def find_corrupted_line(lines) do
+    Enum.with_index(lines)
+    |> Enum.find(&check_fixed(&1, lines))
   end
 
-  def find_change_which_line(lines) when is_list(lines) do
-    lines_with_index = Enum.with_index(lines)
+  def find_corrupted_line_and_fix(file_path) when is_binary(file_path) do
+    lines = FileTool.convert_file_to_list(file_path)
+    find_corrupted_line_and_fix(lines)
+  end
 
-    result =
-      Enum.find(
-        lines_with_index,
-        &change_operation_and_run_all_instruction(&1, lines)
-      )
+  def find_corrupted_line_and_fix(lines) when is_list(lines) do
+    {line_content_string, line_index} = find_corrupted_line(lines)
 
-    IO.inspect(result)
-    {line_content_string, line_index} = result
-
-    new_lines = change_operation_in_lines(lines, line_index)
-    IO.inspect(new_lines, label: "new_lines:", pretty: true)
-    {:ok, accumulator: accumulator} = run_all_instruction(0, [], 0, new_lines)
+    {:ok, accumulator: accumulator} =
+      change_operation_and_run_all_instruction({line_content_string, line_index}, lines)
 
     %{line_content_string: line_content_string, line_index: line_index, accumulator: accumulator}
   end
 
-  def change_operation_and_run_all_instruction(line_content_string_with_index, lines) do
-    {line_content_string, line_index} = line_content_string_with_index
-
-    if is_acc_operation(line_content_string) do
-      false
-    end
-
-    new_lines = change_operation_in_lines(lines, line_index)
-    result = run_all_instruction(0, [], 0, new_lines)
+  def check_fixed(line_content_string_with_index, lines) do
+    result = change_operation_and_run_all_instruction(line_content_string_with_index, lines)
 
     case result do
       {:ok, _} -> true
       _ -> false
     end
+  end
+
+  def change_operation_and_run_all_instruction(
+        {line_content_string, line_index} = _line_content_string_with_index,
+        lines
+      ) do
+    if is_acc_operation(line_content_string) do
+      false
+    end
+
+    new_lines = change_operation_in_lines(lines, line_index)
+    run_all_instruction(0, [], 0, new_lines)
   end
 
   def is_acc_operation(line_content) do

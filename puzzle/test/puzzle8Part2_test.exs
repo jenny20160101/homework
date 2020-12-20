@@ -16,7 +16,6 @@ defmodule Puzzle8Test do
 
   test "迭代直到 某一行重复执行, 输入字符串" do
     lines = @lines
-
     result = Puzzle8.run_all_instruction(0, [], 0, lines)
 
     assert {:infinite_loop,
@@ -27,70 +26,20 @@ defmodule Puzzle8Test do
   end
 
   test "解析每一行" do
-    lines =
-      String.split(
-        "nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-jmp -4
-acc +6",
-        "\n"
-      )
-
-    assert Puzzle8.extract_instruction(lines, 0) == %{
+    assert Puzzle8.extract_instruction(@lines, 0) == %{
              operation: "nop",
              argument: 0,
              line_index: 0
            }
 
-    assert Puzzle8.extract_instruction(lines, 1) == %{
+    assert Puzzle8.extract_instruction(@lines, 1) == %{
              operation: "acc",
              argument: 1,
              line_index: 1
            }
   end
 
-  test "迭代直到 某一行重复执行, 输入文件名:input_sample" do
-    {:infinite_loop,
-     %{
-       accumulator: accumulator,
-       line_index: line_index
-     }} = Puzzle8.run_all_instruction("/data/homework/puzzle/lib/puzzle8_input_sample.txt")
-
-    assert accumulator == 5
-    assert line_index == 1
-  end
-
-  test "迭代直到 某一行重复执行, 输入文件名:input" do
-    {:infinite_loop,
-     %{
-       accumulator: accumulator,
-       line_index: line_index
-     }} = Puzzle8.run_all_instruction("/data/homework/puzzle/lib/puzzle8_input.txt")
-
-    assert accumulator == 1134
-    assert line_index == 372
-  end
-
   test "执行1行动作" do
-#    lines =
-#      String.split(
-#        "nop +0
-#   acc +1
-#   jmp +4
-#   acc +3
-#   jmp -3
-#   acc -99
-#   acc +1
-#   jmp -4
-#   acc +6",
-#        "\n"
-#      )
-
     accumulator = 0
     line_index1 = 0
     trace = []
@@ -180,20 +129,21 @@ acc +6",
   end
 
   test "修改动作后，能结束 . 输入list" do
-    line = Puzzle8Part2.find_change_which_line(@lines)
-    assert line ==%{line_content_string: "jmp -4", line_index: 7, accumulator: 8}
+    line = Puzzle8Part2.find_corrupted_line_and_fix(@lines)
+    assert line == %{line_content_string: "jmp -4", line_index: 7, accumulator: 8}
   end
 
   test "修改动作后，能结束  输入：sample_input" do
-    line = Puzzle8Part2.find_change_which_line("/data/homework/puzzle/lib/puzzle8_input_sample.txt")
-    assert line ==%{line_content_string: "jmp -4", line_index: 7, accumulator: 8}
+    line =
+      Puzzle8Part2.find_corrupted_line_and_fix(
+        "/data/homework/puzzle/lib/puzzle8_input_sample.txt"
+      )
 
-
+    assert line == %{line_content_string: "jmp -4", line_index: 7, accumulator: 8}
   end
 
   test "修改动作后，能结束  输入：input" do
-    line = Puzzle8Part2.find_change_which_line("/data/homework/puzzle/lib/puzzle8_input.txt")
+    line = Puzzle8Part2.find_corrupted_line_and_fix("/data/homework/puzzle/lib/puzzle8_input.txt")
     assert line == %{accumulator: 1205, line_content_string: "jmp -73", line_index: 156}
-
   end
 end
