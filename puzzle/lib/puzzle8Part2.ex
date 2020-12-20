@@ -2,31 +2,6 @@ defmodule Puzzle8Part2 do
   @moduledoc """
   Documentation for `Puzzle`.
   """
-
-  def run_all_instruction(accumulator, trace, line_index, lines) do
-    run_result = extract_instruction(lines, line_index) |> run_one_instruction(accumulator, trace)
-
-    if run_result.line_index >= Enum.count(lines) do
-      {:ok, accumulator: run_result.accumulator}
-    else
-      if Enum.any?(trace, fn x -> x == run_result.line_index end) do
-        {:infinite_loop, run_result}
-      else
-        run_all_instruction(
-          run_result.accumulator,
-          run_result.trace,
-          run_result.line_index,
-          lines
-        )
-      end
-    end
-  end
-
-  def find_corrupted_line(lines) do
-    Enum.with_index(lines)
-    |> Enum.find(&check_fixed(&1, lines))
-  end
-
   def find_corrupted_line_and_fix(file_path) when is_binary(file_path) do
     lines = FileTool.convert_file_to_list(file_path)
     find_corrupted_line_and_fix(lines)
@@ -39,6 +14,11 @@ defmodule Puzzle8Part2 do
       change_operation_and_run_all_instruction({line_content_string, line_index}, lines)
 
     %{line_content_string: line_content_string, line_index: line_index, accumulator: accumulator}
+  end
+
+  def find_corrupted_line(lines) do
+    Enum.with_index(lines)
+    |> Enum.find(&check_fixed(&1, lines))
   end
 
   def check_fixed(line_content_string_with_index, lines) do
@@ -55,11 +35,38 @@ defmodule Puzzle8Part2 do
         lines
       ) do
     if is_acc_operation(line_content_string) do
-      false
+      {:ignore_acc}
+    else
+      new_lines = change_operation_in_lines(lines, line_index)
+      run_all_instruction(0, [], 0, new_lines)
     end
+  end
 
-    new_lines = change_operation_in_lines(lines, line_index)
-    run_all_instruction(0, [], 0, new_lines)
+  def run_all_instruction(accumulator, trace, line_index, lines) do
+    run_result =
+      extract_instruction(lines, line_index)
+      |> run_one_instruction(accumulator, trace)
+
+    is_last_line = run_result.line_index >= Enum.count(lines)
+
+    case is_last_line do
+      true ->
+        {:ok, accumulator: run_result.accumulator}
+
+      false ->
+        will_run_a_second_time = Enum.any?(trace, fn x -> x == run_result.line_index end)
+
+        if will_run_a_second_time do
+          {:infinite_loop, run_result}
+        else
+          run_all_instruction(
+            run_result.accumulator,
+            run_result.trace,
+            run_result.line_index,
+            lines
+          )
+        end
+    end
   end
 
   def is_acc_operation(line_content) do
@@ -82,8 +89,6 @@ defmodule Puzzle8Part2 do
   end
 
   def extract_instruction(lines, line_index) do
-    #    %{operation: List.first(line_content), argument: String.to_integer(List.last(line_content))}
-    #    |> Map.put(:line_index, line_index)
     extract_instruction(Enum.at(lines, line_index)) |> Map.put(:line_index, line_index)
   end
 
