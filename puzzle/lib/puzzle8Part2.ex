@@ -43,10 +43,7 @@ defmodule Puzzle8Part2 do
   end
 
   def run_all_instruction(accumulator, trace, line_index, lines) do
-    run_result =
-      extract_instruction(lines, line_index)
-      |> run_one_instruction(accumulator, trace)
-
+    run_result = run_one_instruction(accumulator, trace, lines, line_index)
     is_last_line = run_result.line_index >= Enum.count(lines)
 
     case is_last_line do
@@ -95,6 +92,11 @@ defmodule Puzzle8Part2 do
   def extract_instruction(line_content_string) do
     line_content = String.split(line_content_string)
     %{operation: List.first(line_content), argument: String.to_integer(List.last(line_content))}
+  end
+
+  def run_one_instruction(accumulator, trace, lines, line_index) do
+    instruction = extract_instruction(lines, line_index)
+    run_one_instruction(instruction, accumulator, trace)
   end
 
   def run_one_instruction(
