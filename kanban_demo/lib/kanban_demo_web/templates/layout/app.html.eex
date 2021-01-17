@@ -8,26 +8,64 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
-    </main>
+  <body data-tilte="html" data-preview=true>
+    <div class="h-screen flex">
+        <div class="px-8 py-4 w-64 bg-gray-100 border-r">
+            <img class="h-9 w-9" src="images/logo1.jpeg"/>
+            <nav class="mt-8">
+                <h2  class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Issues</h2>
+                <div class="mt-2 -mx-3">
+                    <a href="#" class="flex justify-between items-center px-3 py-2  bg-gray-200 rounded-lg">
+                    <span class="text-sm font-medium text-gray-900">All</span>
+                    <span class="text-xs font-semibold text-gray-700">36</span></a>
+                </div>
+                <div class="mt-2 -mx-3">
+                    <a href="#" class="flex justify-between items-center px-3 py-2  rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Assigned to me</span>
+                    <span class="text-xs font-semibold text-gray-700">2</span></a>
+                </div>
+                <div class="mt-2 -mx-3">
+                    <a href="#" class="flex justify-between items-center px-3 py-2 rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Created by me</span>
+                    <span class="text-xs font-semibold text-gray-700">1</span></a>
+                </div>
+                <div class="mt-2 -mx-3">
+                    <a href="#" class="flex justify-between items-center px-3 py-2 rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Archived</span> </a>
+                </div>
+
+                <h2  class="mt-8 text-xs font-semibold text-gray-600 uppercase tracking-wide">Tags</h2>
+                <div class="mt-2 -mx-3">
+                    <a href="#" class="flex justify-between items-center px-3 py-2  rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Bug</span>
+                    </a>
+
+                    <a href="#" class="flex justify-between items-center px-3 py-2   rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Feature Request</span>
+                    </a>
+
+                    <a href="#" class="flex justify-between items-center px-3 py-2  rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Marketing</span>
+                    </a>
+                    <a href="#" class="flex justify-between items-center px-3 py-2 rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">v2.0</span>
+                    </a>
+                    <a href="#" class="flex justify-between items-center px-3 py-2   rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Enhancement</span>
+                    </a>
+                    <a href="#" class="flex justify-between items-center px-3 py-2   rounded-lg">
+                    <span class="text-sm font-medium text-gray-700">Design</span>
+                    </a>
+                </div>
+                <button class="mt-4 -ml-1 flex1 items-center text-sm font-mediem text-gray-600">
+                <span class="ml-1"> + New Project</span>
+                </button>
+            </nav>
+        </div>
+        <div class="flex-1 min-w-0 bg-white">
+            <div class="border-b-2 border-gray-200"></div>
+            <div class=""></div>
+        </div>
+    </div>
   </body>
 </html>
