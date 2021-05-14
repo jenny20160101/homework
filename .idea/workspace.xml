@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5215f48e-302d-4362-bfca-a3b09c32d4b9" name="默认的" comment="">
+    <list default="true" id="5215f48e-302d-4362-bfca-a3b09c32d4b9" name="默认的" comment="默认的">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/puzzle/lib/puzzle8Part2.ex" beforeDir="false" afterPath="$PROJECT_DIR$/puzzle/lib/puzzle8Part2.ex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/puzzle/test/puzzle8Part2_test.exs" beforeDir="false" afterPath="$PROJECT_DIR$/puzzle/test/puzzle8Part2_test.exs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elixir-temp-test/test.ex" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
@@ -55,6 +56,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -65,8 +67,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599268641088</updated>
+      <workItem from="1620956469577" duration="663000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -79,12 +85,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1786" y="103" width="908" height="718" key="find.popup" timestamp="1608450048434">
-      <screen x="1280" y="-67" width="1920" height="1057" />
-    </state>
-    <state x="337" y="139" width="605" height="490" key="find.popup/0.23.1280.722/1280.-67.1920.1057@0.23.1280.722" timestamp="1608450022563" />
-    <state x="1786" y="103" width="908" height="718" key="find.popup/0.23.1280.722/1280.-67.1920.1057@1280.-67.1920.1057" timestamp="1608450048434" />
   </component>
 </project>

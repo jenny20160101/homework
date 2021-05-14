@@ -14,9 +14,10 @@ defmodule Test do
     list=[1,2,3]
     total=Number.new("0")
     reducer=&Number.add(&2,&1)
-    converter=&Number.to_string
+    converter=&Number.to_string/1
     Enum.reduce(list, total, reducer)|> converter.()
 
+    %Plug.Conn{}
   end
 
 end
