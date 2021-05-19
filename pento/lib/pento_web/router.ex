@@ -84,5 +84,4 @@ defmodule PentoWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
   end
-
 end
