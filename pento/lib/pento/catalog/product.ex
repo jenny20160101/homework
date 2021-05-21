@@ -20,11 +20,11 @@ defmodule Pento.Catalog.Product do
     |> validate_number(:unit_price, greater_than: 0.0)
   end
 
-    @doc false
-    def changeset1(product, attrs) do
-      product
-      |> cast(attrs, [:unit_price])
-      |> validate_required([:unit_price])
-      |> validate_number(:unit_price, less_than: product.unit_price)
-    end
+  @doc false
+  def changeset1(product, attrs) do
+    product
+    |> cast(attrs, [:unit_price])
+    |> validate_required([:unit_price])
+    |> validate_number(:unit_price, less_than: product.unit_price)
+  end
 end
