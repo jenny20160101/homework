@@ -32,7 +32,7 @@ defmodule PentoWeb.ProductLive.FormComponent do
       {:ok, _product} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Product updated successfully")
+         |> put_flash(:info, "Product updated successfully!")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
