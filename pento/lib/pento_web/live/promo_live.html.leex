@@ -6,7 +6,8 @@
 <%= f = form_for @changeset, "#",
   id: "promo-form1",
   phx_change: "validate",
-  phx_submit: "save" %>
+  phx_submit: "save"
+  %>
 
 <%= label f, :first_name %>
 <%= text_input f, :first_name %>
@@ -14,8 +15,8 @@
 
 
 <%= label f, :email %>
-<%= text_input f, :email %>
+<%= text_input f, :email , phx_debounce: "blur"%>
 <%= error_tag f, :email %>
 
-  <%= submit "Send Promo", phx_disable_with: "Sending..." %>
+  <%= submit "Send Promo",  phx_disable_with: "Sending promo" %>
 </form>

@@ -28,11 +28,12 @@ defmodule PentoWeb.PromoLive do
     changeset =
       recipient
       |> Promo.change_recipient(recipient_params)
-      |> IO.inspect(label: "hello::::", pretty: true)
       |> Map.put(:action, :validate)
 
-    IO.inspect(changeset, pretty: true)
-
     {:noreply, socket |> assign(:changeset, changeset)}
+  end
+
+  def handle_event("save", %{"recipient" => _recipient_params}, _socket) do
+    :timer.sleep(1000)
   end
 end
