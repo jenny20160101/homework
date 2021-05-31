@@ -11,6 +11,22 @@ defmodule PentoWeb.ProductLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)}
+     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png), max_entries: 1, auto_upload: true, progress: &handle_progress/3)
+  end
+
+  defp handle_progress(:avatar, entry, socket) do
+    if entry.done? do
+
+      uploaded_file =  entry
+      # uploaded_file =
+      #   consume_uploaded_entry(socket, entry, fn %{} = meta ->
+      #     ...
+      #   end)
+
+      {:noreply, put_flash(socket, :info, "file #{uploaded_file.name} uploaded")}
+    else
+      {:noreply, socket}
+    end
   end
 
   @impl true

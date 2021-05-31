@@ -7,6 +7,7 @@ defmodule Pento.Catalog.Product do
     field :name, :string
     field :sku, :integer
     field :unit_price, :float
+    field :image_upload, :string
 
     timestamps()
   end
