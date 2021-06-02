@@ -3,21 +3,36 @@ defmodule PentoWeb.ProductLive.FormComponent do
 
   alias Pento.Catalog
 
+  # @impl true
+  # def update1(%{product: product} = assigns, socket) do
+  #   changeset = Catalog.change_product(product)
+
+  #   {:ok,
+  #    socket
+  #    |> assign(assigns)
+  #    |> assign(:changeset, changeset)
+  #    |> allow_upload(:image,
+  #    accept: ~w(.jpg .jpeg .png),
+  #    max_entries: 1,
+  #     auto_upload: true)
+  # }
+  # end
+
   @impl true
   def update(%{product: product} = assigns, socket) do
     changeset = Catalog.change_product(product)
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(:changeset, changeset)}
-     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png), max_entries: 1, auto_upload: true, progress: &handle_progress/3)
+    socket =
+      socket
+      |> assign(assigns)
+      |> assign(:changeset, changeset)
+
+    {:ok, allow_upload(socket, :image, accept: ~w(.jpg .jpeg .png), max_entries: 1, auto_upload: true, progress: &handle_progress/3)}
   end
 
   defp handle_progress(:avatar, entry, socket) do
     if entry.done? do
-
-      uploaded_file =  entry
+      uploaded_file = entry
       # uploaded_file =
       #   consume_uploaded_entry(socket, entry, fn %{} = meta ->
       #     ...
