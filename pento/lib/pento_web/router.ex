@@ -67,6 +67,10 @@ defmodule PentoWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     live "/guess", WrongLive
 
+
+    # search product by SKU
+    live "/products/search", SearchLive, :search
+
     # generated product routes start here
     live "/products", ProductLive.Index, :index
     live "/products/new", ProductLive.Index, :new
@@ -75,8 +79,10 @@ defmodule PentoWeb.Router do
     live "/products/:id", ProductLive.Show, :show
     live "/products/:id/show/edit", ProductLive.Show, :edit
 
+
     # promo
     live "/promo", PromoLive
+
   end
 
   scope "/", PentoWeb do
