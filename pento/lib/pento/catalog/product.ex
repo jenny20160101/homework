@@ -28,4 +28,12 @@ defmodule Pento.Catalog.Product do
     |> validate_required([:unit_price])
     |> validate_number(:unit_price, less_than: product.unit_price)
   end
+
+    @doc false
+    def changeset_search(product, attrs) do
+      product
+      |> cast(attrs, [:sku])
+      |> validate_required([ :sku])
+      |> validate_format(:sku, ~r/^\d{7,}/)
+    end
 end
