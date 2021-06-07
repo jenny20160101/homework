@@ -34,10 +34,13 @@ defmodule PentoWeb.SearchLive do
   end
 
   @impl true
-  def handle_event("search", _, socket) do
+  def handle_event("search", %{"product" => product} = _product_params,  socket) do
     IO.inspect("search============")
+    IO.inspect(product)
 
-    product = Catalog.get_product!(1)
+    %{"sku" => sku} = product
+
+    product = Catalog.get_product_by_sku(sku)
 
     {:noreply, assign(socket, :product, product)}
   end

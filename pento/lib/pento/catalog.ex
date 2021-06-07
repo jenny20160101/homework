@@ -37,6 +37,10 @@ defmodule Pento.Catalog do
   """
   def get_product!(id), do: Repo.get!(Product, id)
 
+  def get_product_by_sku(sku), do
+    nil
+  end
+
   @doc """
   Creates a product.
 
