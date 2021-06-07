@@ -10,11 +10,6 @@
   %>
 
 <%= label f, :sku %>
-<%= text_input f, :sku %>
-<%= error_tag f, :sku %>
-
-
-<%= label f, :sku %>
 <%= text_input f, :sku , phx_debounce: "blur"%>
 <%= error_tag f, :sku %>
 
