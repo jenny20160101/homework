@@ -37,8 +37,12 @@ defmodule Pento.Catalog do
   """
   def get_product!(id), do: Repo.get!(Product, id)
 
-  def get_product_by_sku(sku), do
-    nil
+  def get_product_by_sku(sku) do
+    from(
+      f in Product,
+      where: [sku: ^sku]
+    )
+    |> Repo.all()
   end
 
   @doc """

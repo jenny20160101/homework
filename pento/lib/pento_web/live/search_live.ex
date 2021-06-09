@@ -12,6 +12,7 @@ defmodule PentoWeb.SearchLive do
     socket =
       socket
       |> assign(:changeset, changeset)
+      |> assign(:products, [])
 
     # IO.inspect(socket)
 
@@ -20,28 +21,28 @@ defmodule PentoWeb.SearchLive do
 
   @impl true
   def handle_event("validate", %{"product" => product} = _product_params, socket) do
-    IO.inspect("validate----------")
+    # IO.inspect("validate----------")
     # IO.inspect(product_params)
-    IO.inspect(product)
+    # IO.inspect(product)
 
     changeset =
       Catalog.change_product_search(%Product{}, product)
       |> Map.put(:action, :validate)
 
-    IO.inspect(changeset)
+    # IO.inspect(changeset)
 
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
   @impl true
-  def handle_event("search", %{"product" => product} = _product_params,  socket) do
-    IO.inspect("search============")
-    IO.inspect(product)
+  def handle_event("search", %{"product" => %{"sku" => sku}} = _product_params, socket) do
+    # IO.inspect("search============")
+    # IO.inspect(product_params)
+    # IO.inspect(sku)
 
-    %{"sku" => sku} = product
+    products = Catalog.get_product_by_sku(sku)
+    # IO.inspect(products)
 
-    product = Catalog.get_product_by_sku(sku)
-
-    {:noreply, assign(socket, :product, product)}
+    {:noreply, assign(socket, :products, products)}
   end
 end
