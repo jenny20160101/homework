@@ -6,6 +6,7 @@ defmodule Pento.Survey.Rating do
 
   schema "ratings" do
     field :stars, :integer
+    field :product_id, :integer
     belongs_to :user, User
     belongs_to :Product, Product
 

@@ -58,6 +58,7 @@ defmodule Pento.Catalog do
 
   """
   def create_product(attrs \\ %{}) do
+    IO.inspect(attrs, label: "dddddddd")
     %Product{}
     |> Product.changeset(attrs)
     |> Repo.insert()
