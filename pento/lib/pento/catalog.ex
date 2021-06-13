@@ -59,6 +59,7 @@ defmodule Pento.Catalog do
   """
   def create_product(attrs \\ %{}) do
     IO.inspect(attrs, label: "dddddddd")
+
     %Product{}
     |> Product.changeset(attrs)
     |> Repo.insert()
@@ -118,5 +119,9 @@ defmodule Pento.Catalog do
   def markdown_product(%Product{} = product, decrease_price) do
     attrs = %{unit_price: product.unit_price - decrease_price}
     product |> Product.changeset1(attrs) |> Repo.update()
+  end
+
+  def list_products_with_user_ratings(user) do
+    Product.Query.with_user_ratings(user) |> Repo.all()
   end
 end
