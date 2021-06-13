@@ -80,6 +80,9 @@ defmodule PentoWeb.Router do
 
     # promo
     live "/promo", PromoLive
+
+    # survey
+    live "/survey", SurveyLive, :index
   end
 
   scope "/", PentoWeb do
