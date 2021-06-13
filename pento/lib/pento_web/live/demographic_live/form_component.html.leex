@@ -1,3 +1,10 @@
-<div class="hero">
-<%= @content %>
-</div>
+<% f = form_for @changeset, "#",
+phx_submit: "save",
+id: "demographic-form" %>
+
+<%= label f, :gender %>
+<%= select f, :gender, ["female", "male", "other", "prefer not to say"] %>
+<%= error_tag f, :gender %>
+
+<%= submit "Save", phx_disable_with: "Saving" %>
+ </form>
