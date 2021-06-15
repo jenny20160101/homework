@@ -7,7 +7,7 @@ defmodule PentoWeb.DemographicLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> IO.inspect()
+     |> IO.inspect(label: "FormComponent/update")
      |> assign_demographic()
      |> assign_changeset()}
   end
