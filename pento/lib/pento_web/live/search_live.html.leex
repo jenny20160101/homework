@@ -48,3 +48,9 @@
     <% end %>
   </tbody>
 </table>
+
+<%= if @demographics do %>
+<%= live_component @socket,
+PentoWeb.DemographicLive.ShowComponent, demographic: @demographic
+ %>
+ <% end %>
