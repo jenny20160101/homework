@@ -8,8 +8,7 @@ defmodule PentoWeb.SurveyLive do
      socket
      |> assign_user(token)
      |> assign_demographic()
-    |> assign_products()
-    }
+     |> assign_products()}
   end
 
   def assign_products(%{assigns: %{current_user: current_user}} = socket) do
@@ -39,5 +38,9 @@ defmodule PentoWeb.SurveyLive do
     socket
     |> put_flash(:info, "Demographic created successfully")
     |> assign(:demographic, demographic)
+  end
+
+  defp list_products(user) do
+    Catalog.list_products_with_user_ratings(user)
   end
 end

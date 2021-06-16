@@ -12,6 +12,6 @@ defmodule PentoWeb.RatingLive.ShowComponent do
   end
 
   def unfilled_stars(stars) do
-      List.dulicate("<span class='fa fa-star'></span>", stars)
+    List.duplicate("<span class='fa fa-star'></span>", stars)
   end
 end
