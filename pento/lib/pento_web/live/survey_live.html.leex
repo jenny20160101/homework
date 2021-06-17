@@ -1,9 +1,7 @@
 <section class="row">
 <h2>Survey</h2>
 </section>
-<section class="row">
-
-
+<section>
 <%= if @demographic do %>
     <%= live_component @socket,
     PentoWeb.DemographicLive.ShowComponent,
