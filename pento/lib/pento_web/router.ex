@@ -83,6 +83,9 @@ defmodule PentoWeb.Router do
 
     # survey
     live "/survey", SurveyLive, :index
+
+    #
+    live "/admin-dashboard", AdminDashboardLive, :index
   end
 
   scope "/", PentoWeb do
