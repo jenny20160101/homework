@@ -78,4 +78,8 @@ defmodule Pento.Catalog.Product.Query do
   defp apply_age_group_filter(query, _filter) do
     query
   end
+
+  def with_zero_ratings(query \\ base()) do
+    query |> select([p], {p.name, 0})
+  end
 end
