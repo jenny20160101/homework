@@ -13,7 +13,6 @@ defmodule PentoWeb.SurveyResultsLive do
      |> assign_dataset()
      |> assign_chart()
      |> assign_chart_svg()
-
     }
   end
 
@@ -59,7 +58,8 @@ defmodule PentoWeb.SurveyResultsLive do
   end
 
   def make_bar_chart(dataset) do
-    Contex.BarChart.new(dataset) |> IO.inspect(label: "make_bar_chart:--------------------------------------")
+    Contex.BarChart.new(dataset)
+    #|> IO.inspect(label: "make_bar_chart:--------------------------------------")
   end
 
   def assign_chart_svg(%{assigns: %{chart: chart}} = socket) do
@@ -70,6 +70,7 @@ defmodule PentoWeb.SurveyResultsLive do
     Plot.new(500, 400, chart)
     |> Plot.titles(title(), subtitle())
     |> Plot.axis_labels(x_axis(), y_axis())
+   # |> IO.inspect(label: "Plot.axis_labels:--------------------------------------")
     |> Plot.to_svg()
   end
 

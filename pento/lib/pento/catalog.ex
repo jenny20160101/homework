@@ -131,6 +131,7 @@ defmodule Pento.Catalog do
     |> Product.Query.join_demographics()
     |> Product.Query.filter_by_age_group(age_group_filter)
     |> Repo.all()
+    |> IO.inspect(label: "products_with_average_ratings---------------------------")
   end
 
   def product_with_zero_ratings do
