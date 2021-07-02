@@ -6,9 +6,10 @@
     <%= live_component @socket,
     PentoWeb.DemographicLive.ShowComponent,
     demographic: @demographic %>
+<% end %>
     <%= live_component @socket,
     PentoWeb.RatingLive.IndexComponent,
     products: @products,
     current_user: @current_user %>
-<% end %>
+
 </section>
