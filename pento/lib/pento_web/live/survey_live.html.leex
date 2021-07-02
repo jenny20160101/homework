@@ -2,11 +2,19 @@
 <h2>Survey</h2>
 </section>
 <section>
-<%= if @demographic do %>
-    <%= live_component @socket,
-    PentoWeb.DemographicLive.ShowComponent,
-    demographic: @demographic %>
-<% end %>
+    <%= if @demographic do %>
+        <%= live_component @socket,
+        PentoWeb.DemographicLive.ShowComponent,
+        demographic: @demographic %>
+    <% else %>
+        <%= live_component @socket,
+        PentoWeb.DemographicLive.FormComponent,
+        user: @current_user,
+        id: "demographic-#{@current_user.id}-form"
+        %>
+
+    <% end %>
+
     <%= live_component @socket,
     PentoWeb.RatingLive.IndexComponent,
     products: @products,
