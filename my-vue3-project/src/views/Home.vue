@@ -8,6 +8,7 @@
 import { defineComponent } from 'vue';
 // import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import ItemsListComponent from "@/components/items/ItemsList.componet.vue"
+    import {ItemInterface} from "@/models/items/Item.interface"
 
 export default defineComponent({
   name: 'Home',
@@ -17,10 +18,10 @@ export default defineComponent({
   },
   setup() {
 
-        const items: any[] = [
-            {id:1, name: "Item 1"},
-            {id:2, name: "Item 2"},
-            {id:3, name: "Item 3"},
+        const items: ItemInterface[] = [
+            {id:1, name: "Item 1", selected: false},
+            {id:2, name: "Item 2", selected: false},
+            {id:3, name: "Item 3", selected: false},
         ]
         return {items}
     }
