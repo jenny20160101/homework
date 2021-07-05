@@ -1,16 +1,21 @@
 <template>
-    <div class="home">
-        <ItemsListComponent :items="items" />
-    </div>
+  <div class="home">
+<ItemsListComponent :items="items" />
+  </div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from  'vue'
+import { defineComponent } from 'vue';
+// import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import ItemsListComponent from "@/components/items/ItemsList.componet.vue"
 
 export default defineComponent({
-    name: "Home",
-    components:{ItemsListComponent},
-    setup() {
+  name: 'Home',
+  components: {
+    // HelloWorld,
+    ItemsListComponent
+  },
+  setup() {
 
         const items: any[] = [
             {id:1, name: "Item 1"},
@@ -19,5 +24,5 @@ export default defineComponent({
         ]
         return {items}
     }
-})
+});
 </script>

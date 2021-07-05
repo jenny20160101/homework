@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Items:</h3>
+        <h3>My Items:</h3>
         <ul>
             <li v-for="item in items" :key="item.id">
                 {{ item.name }}
