@@ -2,7 +2,8 @@
   <div>
     <h3>My Items:</h3>
     <h3>Items - loading: {{loading}}</h3>
-    <ul>
+    <Loader v-show="loading"></Loader>
+    <ul v-show="!loading">
       <ItemComponent
         v-for="item in items"
         :key="item.id"
@@ -16,9 +17,10 @@
 import { defineComponent, PropType } from "vue";
 import { ItemInterface } from "@/models/items/Item.interface";
 import ItemComponent from "./children/Item.component.vue";
+import Loader from "@/components/shared/Loader.component.vue";
 
 export default defineComponent({
-  components: { ItemComponent },
+  components: { ItemComponent, Loader },
   props: {
     items: {
       type: Array as PropType<ItemInterface[]>,
