@@ -25,11 +25,12 @@ export default defineComponent({
             return css.trim()
         })
         
-        const onclick = ()=>{
+        const onClick = ()=>{
+          
             emit("select", props.model)
         }
         return {
-            css, onclick
+            css, onClick
         }
     },
 })
