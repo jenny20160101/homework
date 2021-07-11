@@ -14,7 +14,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType} from "vue";
 import { ItemInterface } from "@/models/items/Item.interface";
 import ItemComponent from "./children/Item.component.vue";
 import Loader from "@/components/shared/Loader.component.vue";
@@ -27,10 +27,11 @@ export default defineComponent({
     },
     loading: { type: Boolean },
   },
-  setup() {
+  setup(props, { emit }) {
     const onItemSelect = (item: ItemInterface) => {
-      item.selected = !item.selected;
-      console.log("onItemSelect", item.id, item.selected);
+      // item.selected = !item.selected;
+      // console.log("onItemSelect", item.id, item.selected);
+      emit("selectItem", item)
     };
     return { onItemSelect };
   },

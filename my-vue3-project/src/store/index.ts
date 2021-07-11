@@ -17,6 +17,13 @@ export default createStore({
     loadedItems(state: ItemsStateInterface, items: ItemInterface[]) {
       state.loading = false
       state.items = items
+    },
+    selectItem(state: ItemsStateInterface, params:{id: number, selected: boolean}){
+      const {id, selected} = params
+      const item = state.items.find(o=>o.id===id)
+      if(item){
+        item.selected = selected
+      }
     }
   },
   actions: {
@@ -33,6 +40,11 @@ export default createStore({
       setTimeout(() => {
         commit("loadedItems", mockItems)
       }, 1000)
+
+    },
+
+    selectItem({ commit}, params:{id: number, selected: boolean}){
+      commit("selectItem", params)
     }
   },
   modules: {
