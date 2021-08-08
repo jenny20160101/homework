@@ -9,11 +9,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, onMounted } from "vue";
+import { defineComponent,  computed, onMounted } from "vue";
 // import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import ItemsListComponent from "@/components/items/ItemsList.componet.vue";
 import { ItemInterface } from "@/models/items/Item.interface";
-import store from "@/store";
+// import store from "@/store";
+import {rootStore} from "@/store";
+import {MutationType, StoreModuleNames} from "@/models/store";
+import {useItemsStore} from "@/store/items";
 
 export default defineComponent({
   name: "Home",
@@ -22,26 +25,34 @@ export default defineComponent({
     ItemsListComponent,
   },
   setup() {
-    // const items: ItemInterface[] = reactive([
-    //   { id: 1, name: "Item 1", selected: false },
-    //   { id: 2, name: "Item 2", selected: true },
-    //   { id: 3, name: "Item 3", selected: false },
-    // ]);
+    const itemsStore=useItemsStore()
+
+
 
     const items = computed(() => {
-      return store.state.items;
+      // return store.state.items;
+      return itemsStore.state.items;
     });
     const loading = computed(()=>{
-      return store.state.loading;
+      // return store.state.loading;
+      return itemsStore.state.loading;
     });
 
     onMounted(()=>{
-      store.dispatch("loadItems")
+      // store.dispatch(MutationType.items.loadItems)
+      // store.dispatch(`${StoreModuleNames.itemsState}/${MutationType.items}`)
+      itemsStore.action(MutationType.items.loadItems)
     });
 
   const onSelectItem = (item: ItemInterface)=>{
-    store.dispatch("selectItem", {id: item.id,
-    selected: !item.selected})
+    // store.dispatch("selectItem", {id: item.id,
+    // selected: !item.selected})
+
+    // store.dispatch(`${StoreModuleNames.itemsState}/${MutationType.items}`,{id: item.id,
+    //   selected: !item.selected})
+
+    itemsStore.action(MutationType.items.selectItem, {id: item.id,
+      selected: !item.selected})
   }
 
 
