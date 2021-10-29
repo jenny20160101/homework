@@ -17,7 +17,8 @@ defmodule PentoWeb.Router do
   scope "/", PentoWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live "/", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
