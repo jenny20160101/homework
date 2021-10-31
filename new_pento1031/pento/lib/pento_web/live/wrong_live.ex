@@ -11,12 +11,16 @@ defmodule PentoWeb.WrongLive do
   @impl true
   def render(assigns) do
     ~L"""
-    <h1>Your score: <%= @score %></h1>​<h2>​<%= @message %>​</h2>​
+    <h1>Your score: <%= @score %></h1>​<h2>​<%= @message %>It's <%= time() %>​</h2>​
     ​ 	​  <h2>​
     ​ 	​    <%= for n <- 1..10 do %>​
     ​ 	​      <a href="#" phx-click="guess" phx-value-number="<%= n %>"><%= n %></a>​
     ​ 	​    <% end %>​</h2>​
     """
+  end
+
+  def time do
+    DateTime.utc_now |> to_string
   end
 
   @impl true
