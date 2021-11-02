@@ -1,9 +1,9 @@
-defmodule Pento.MixProject do
+defmodule MyApp.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :pento,
+      app: :my_app,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Pento.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Pento.Application, []},
+      mod: {MyApp.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -33,7 +33,6 @@ defmodule Pento.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 2.0"},
       {:phoenix, "~> 1.5.3"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -47,8 +46,7 @@ defmodule Pento.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:phx_gen_auth, "~> 0.7.0"}
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 
