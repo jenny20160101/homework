@@ -25,6 +25,14 @@ defmodule Pento.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  # def test_create_user() do
+  #   param = %{
+  #     email: "jenny.hu@scrumcn.com",
+  #     password: "a000000000000"
+  #   }
+  #   Accounts.register_user(param)
+  # end
+
   @doc """
   Gets a user by email and password.
 
