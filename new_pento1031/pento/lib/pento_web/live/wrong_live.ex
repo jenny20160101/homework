@@ -2,10 +2,17 @@ defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     # {:ok, assign(socket, query: "abcd", results: %{"key1" => "name1"})}
+    IO.inspect(session)
 
-    {:ok, assign(socket, score: 0, message: "Guess a number")}
+    {:ok,
+     assign(socket,
+       score: 0,
+       message: "Guess a number",
+       user: Pento.Accounts.get_user_by_session_token(session["user_token"]),
+       session_id: session["live_socket_id"]
+     )}
   end
 
   @impl true
@@ -16,11 +23,13 @@ defmodule PentoWeb.WrongLive do
     ​ 	​    <%= for n <- 1..10 do %>​
     ​ 	​      <a href="#" phx-click="guess" phx-value-number="<%= n %>"><%= n %></a>​
     ​ 	​    <% end %>​</h2>​
+      <%= @user.email %></br>
+      <%= @session_id %></br>
     """
   end
 
   def time do
-    DateTime.utc_now |> to_string
+    DateTime.utc_now() |> to_string
   end
 
   @impl true
