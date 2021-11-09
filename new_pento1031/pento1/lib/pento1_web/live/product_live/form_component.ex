@@ -57,7 +57,11 @@ defmodule Pento1Web.ProductLive.FormComponent do
 
     File.cp!(path, dest)
     Routes.static_path(socket, "/images/#{Path.basename(dest)}")
+
+   path1 = "/images/#{Path.basename(dest)}"
+
     IO.inspect(dest, label: "dest-------------------")
+    IO.inspect(path1, label: "path1-------------------")
   end
 
   @impl true

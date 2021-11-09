@@ -22,9 +22,9 @@
   <%= number_input f, :sku %>
   <%= error_tag f, :sku %>
 
-  <div phx-drop-target="<%= @uploads.image.ref %>">
-    <%= live_file_input @uploads.image %>
-  </div
+  <div phx-drop-target={@uploads.image.ref}>
+    <%= live_file_input {@uploads.image} %>
+  </div>
 
   <%= hidden_input f, :image_upload %>
 
