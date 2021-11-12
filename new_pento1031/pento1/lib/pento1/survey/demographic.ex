@@ -5,11 +5,10 @@ defmodule Pento1.Survey.Demographic do
   schema "demographics" do
     field :gender, :string
     field :year_of_birth, :integer
-    #field :user_id, :id
+    # field :user_id, :id
     belongs_to :user, User
 
     timestamps()
-
   end
 
   @doc false
@@ -18,7 +17,7 @@ defmodule Pento1.Survey.Demographic do
     |> cast(attrs, [:gender, :year_of_birth, :user_id])
     |> validate_required([:gender, :year_of_birth, :user_id])
     |> validate_inclusion(:gender, ["male", "female", "other", "prefer not to say"])
-    |> validate_inclusion(:year_of_birth, 1900..Date.utc_today.year)
+    |> validate_inclusion(:year_of_birth, 1900..Date.utc_today().year)
     |> unique_constraint(:user_id)
   end
 end

@@ -42,6 +42,7 @@ defmodule Pento1.Survey do
     |> Demographic.Query.for_user()
     |> Repo.one()
   end
+
   @doc """
   Creates a demographic.
 

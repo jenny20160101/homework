@@ -1,3 +1,8 @@
 <section class="row">
 <h2>Survey</h2>
 </section>
+<section class="row">
+<%= live_component @socket, Pento1Web.DemographicLive.FormComponent,
+user: @current_user,
+content: "Hello to the Demographic From Component" %>
+</section>

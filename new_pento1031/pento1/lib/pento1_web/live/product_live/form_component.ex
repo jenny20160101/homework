@@ -11,16 +11,14 @@ defmodule Pento1Web.ProductLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)
-      |> allow_upload(
-        :image,
-        accept: ~w(.jpg .jpeg .png),
-        max_entries: 1,
-        auto_upload: true,
-        progress: &handle_progress/3
-      )
-    }
+     |> allow_upload(
+       :image,
+       accept: ~w(.jpg .jpeg .png),
+       max_entries: 1,
+       auto_upload: true,
+       progress: &handle_progress/3
+     )}
   end
-
 
   def handle_progress(:image, entry, socket) do
     if entry.done? do
@@ -31,12 +29,14 @@ defmodule Pento1Web.ProductLive.FormComponent do
           &upload_static_file(&1, socket)
         )
 
-     a= {:noreply,
-       socket
-       |> put_flash(:info, "file #{entry.client_name} uploaded")
-       |> update_changeset(:image_upload, path)}
-       IO.inspect( a, label: "after handle_progress---------------")
-       a
+      a =
+        {:noreply,
+         socket
+         |> put_flash(:info, "file #{entry.client_name} uploaded")
+         |> update_changeset(:image_upload, path)}
+
+      IO.inspect(a, label: "after handle_progress---------------")
+      a
     else
       {:noreply, socket}
     end
@@ -49,6 +49,7 @@ defmodule Pento1Web.ProductLive.FormComponent do
 
   def upload_static_file(%{path: path}, socket) do
     IO.inspect("hello-------------------")
+
     dest =
       Path.join(
         "priv/static/images",
@@ -58,7 +59,7 @@ defmodule Pento1Web.ProductLive.FormComponent do
     File.cp!(path, dest)
     Routes.static_path(socket, "/images/#{Path.basename(dest)}")
 
-   path1 = "/images/#{Path.basename(dest)}"
+    path1 = "/images/#{Path.basename(dest)}"
 
     IO.inspect(dest, label: "dest-------------------")
     IO.inspect(path1, label: "path1-------------------")
