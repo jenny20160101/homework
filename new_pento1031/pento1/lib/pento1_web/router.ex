@@ -61,7 +61,7 @@ defmodule Pento1Web.Router do
   ## Authentication routes
 
   scope "/", Pento1Web do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:browser]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create

@@ -11,7 +11,7 @@ defmodule Pento1.Catalog.Product do
 
     timestamps()
 
-    has_many :ratings Rating
+    has_many :ratings, Rating
   end
 
   @doc false
