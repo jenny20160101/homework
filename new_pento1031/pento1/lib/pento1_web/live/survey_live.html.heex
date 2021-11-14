@@ -2,9 +2,23 @@
 <h2>Survey</h2>
 </section>
 <section class="row">
+
+<%= if @demographic do %>
+<h3>Demographics</h3>
+<br/>
+<ul>
+    <li>Year of birth: <%= @demographic.year_of_birth %> </li>
+    <li>Gender: <%= @demographic.gender %> </li>
+</ul>
+<% else %>
+
 <%= live_component @socket, Pento1Web.DemographicLive.FormComponent,
 user: @current_user,
 content: "Hello to the Demographic From Component" ,
 id: "demographic-form-#{@current_user.id}"
 %>
+<% end %>
+
+
+
 </section>

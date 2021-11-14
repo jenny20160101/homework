@@ -21,8 +21,8 @@ defmodule Pento1Web.DemographicLive.FormComponent do
   end
 
   @impl true
-  def handle_event("save", %{"demographc" => demographic_params}, socket) do
-    IO.puts("Handling save event and saving demographic record...")
+  def handle_event("save", %{"demographic" => demographic_params}, socket) do
+    IO.puts("Handling save event and saving demographic record...............")
     IO.inspect(demographic_params)
     {:noreply, save_demographic(socket, demographic_params)}
   end
