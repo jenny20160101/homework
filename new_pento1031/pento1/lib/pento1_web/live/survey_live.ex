@@ -15,4 +15,14 @@ defmodule Pento1Web.SurveyLive do
       Accounts.get_user_by_session_token(token)
     end)
   end
+
+  def handle_info({:created_demographic, demographic}, socket) do
+    {:noreply, handle_demographic_created(socket, demographic)}
+  end
+
+  def handle_demographic_created(socket, demographic) do
+    socket
+    |> put_flash(:info, "Demographic created successfully")
+    |> assign(:demographic, demographic)
+  end
 end

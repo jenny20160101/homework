@@ -1,21 +1,22 @@
 <div>
-<.form
-let={f}
-for={@changeset}
-phx_target: @myself,
-phx_submit: "save",
-id: "demographic-form">
-<%= label f, :gender %>
-<%= select f, :gender, ["female", "male", "other", "prefer not to say"] %>
-<%= error_tag f, :gender %>
+    <.form
+        let={f}
+        for={@changeset}
+        phx_target={@myself},
+        phx_submit="save",
+        id="demographic-form">
 
-<%= label f, :year_of_birth %>
-<%= select f, :year_of_birth, Enum.reverse(1940..2021) %>
-<%= error_tag f, :year_of_birth %>
+        <%= label f, :gender %>
+        <%= select f, :gender, ["female", "male", "other", "prefer not to say"] %>
+        <%= error_tag f, :gender %>
 
-<%= hidden_input f, :user_id %>
+        <%= label f, :year_of_birth %>
+        <%= select f, :year_of_birth, Enum.reverse(1940..2021) %>
+        <%= error_tag f, :year_of_birth %>
 
-<%= submit "Save", phx_disable_with: "Saving..." %>
+        <%= hidden_input f, :user_id %>
 
-</.form>
+        <%= submit "Save", phx_disable_with: "Saving..." %>
+
+    </.form>
 </div>
