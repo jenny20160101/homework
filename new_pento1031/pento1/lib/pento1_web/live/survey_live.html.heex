@@ -4,12 +4,10 @@
 <section class="row">
 
 <%= if @demographic do %>
-<h3>Demographics</h3>
-<br/>
-<ul>
-    <li>Year of birth: <%= @demographic.year_of_birth %> </li>
-    <li>Gender: <%= @demographic.gender %> </li>
-</ul>
+<%= live_component @socket, Pento1Web.DemographicLive.ShowComponent,
+demographic: @demographic
+%>
+
 <% else %>
 
 <%= live_component @socket, Pento1Web.DemographicLive.FormComponent,
