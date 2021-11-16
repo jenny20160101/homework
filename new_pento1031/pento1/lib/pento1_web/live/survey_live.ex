@@ -4,10 +4,19 @@ defmodule Pento1Web.SurveyLive do
 
   @impl true
   def mount(_params, %{"user_token" => token} = _session, socket) do
-    {:ok, socket
-    |> assign_user(token)
-  |> assign_demographic()
-  }
+    {:ok,
+     socket
+     |> assign_user(token)
+     |> assign_demographic()
+     |> assign_products()}
+  end
+
+  def assign_products(%{assigns: %{current_user: current_user}} = socket) do
+    assign(socket, :products, list_products(current_user))
+  end
+
+  defp list_products(user) do
+    Catalog.list_products_with_user_ratings(user)
   end
 
   def assign_demographic(%{assigns: %{current_user: current_user}} = socket) do

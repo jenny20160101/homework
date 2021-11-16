@@ -4,18 +4,24 @@
 <section class="row">
 
 <%= if @demographic do %>
-<%= live_component @socket, Pento1Web.DemographicLive.ShowComponent,
-demographic: @demographic
-%>
+    <%= live_component @socket, Pento1Web.DemographicLive.ShowComponent,
+    demographic: @demographic
+    %>
+
+    <%= live_component @socket, Pento1Web.RatingLive.IndexComponent,
+    products: @products,
+    current_user: @current_user %>
 
 <% else %>
 
-<%= live_component @socket, Pento1Web.DemographicLive.FormComponent,
-user: @current_user,
-content: "Hello to the Demographic From Component" ,
-id: "demographic-form-#{@current_user.id}"
-%>
+    <%= live_component @socket, Pento1Web.DemographicLive.FormComponent,
+    user: @current_user,
+    content: "Hello to the Demographic From Component" ,
+    id: "demographic-form-#{@current_user.id}"
+    %>
 <% end %>
+
+
 
 
 
