@@ -18,4 +18,36 @@ defmodule Pento1Web.RatingLive.FormComponent do
   def assign_changeset(%{assigns: %{rating: rating}} = socket) do
     assign(socket, :changeset, Survey.change_rating(rating))
   end
+
+  def handle_event("validate", %{"rating" => rating_params}, socket) do
+    {:noreply, validate_rating(socket, rating_params)}
+  end
+
+  def validate_rating(socket, rating_params) do
+    changeset =
+      socket.assigns.rating
+      |> Survey.change_rating(rating_params)
+      |> Map.put(:action, :validate)
+
+    assign(socket, :changeset, changeset)
+  end
+
+  def handle_event("save", %{"rating" => rating_params}, socket) do
+    {:noreply, save_rating(socket, rating_params)}
+  end
+
+  def save_rating(
+        %{assigns: %{product_index: product_index, product: product}} = socket,
+        rating_params
+      ) do
+    case Survey.create_rating(rating_params) do
+      {:ok, rating} ->
+        product = %{product | ratings: [rating]}
+        send(self(), {:created_rating, product, product_index})
+        socket
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        assign(socket, changeset: changeset)
+    end
+  end
 end
