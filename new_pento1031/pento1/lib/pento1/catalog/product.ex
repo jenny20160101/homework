@@ -2,6 +2,8 @@ defmodule Pento1.Catalog.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Pento1.Survey.Rating
+
   schema "products" do
     field :description, :string
     field :name, :string

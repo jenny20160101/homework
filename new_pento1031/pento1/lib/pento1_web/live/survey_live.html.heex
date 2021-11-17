@@ -1,13 +1,13 @@
 <section class="row">
 <h2>Survey</h2>
 </section>
-<section class="row">
+<section class="">
 
 <%= if @demographic do %>
     <%= live_component @socket, Pento1Web.DemographicLive.ShowComponent,
     demographic: @demographic
     %>
-
+    
     <%= live_component @socket, Pento1Web.RatingLive.IndexComponent,
     products: @products,
     current_user: @current_user %>
